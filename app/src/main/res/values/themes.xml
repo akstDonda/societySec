@@ -1,0 +1,29 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.SecAd" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+    </style>
+
+    <style name="Theme.SecAd" parent="Base.Theme.SecAd" />
+
+    <style name="Theme.App" parent="Theme.Material3.DayNight">
+        ...
+        <item name="colorPrimary">@color/primary_color</item>
+
+        <item name="textInputStyle">@style/Widget.App.TextInputLayout.FilledBox</item>
+    </style>
+
+    <style name="Widget.App.TextInputLayout.FilledBox" parent="Widget.Material3.TextInputLayout.FilledBox">
+        <item name="materialThemeOverlay">@style/ThemeOverlay.App.TextInputEditText.FilledBox</item>
+        <item name="boxBackgroundColor">?attr/colorPrimary</item>
+    </style>
+
+    <style name="ThemeOverlay.App.TextInputEditText.FilledBox" parent="">
+        <item name="editTextStyle">@style/Widget.App.EditText.FilledBox</item>
+    </style>
+
+    <style name="Widget.App.EditText.FilledBox" parent="Widget.Material3.TextInputEditText.FilledBox">
+        <item name="android:textColor">@color/white</item>
+    </style>
+</resources>
