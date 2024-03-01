@@ -1,18 +1,26 @@
 package com.nothing.secad.simple
 
+import android.content.ContentValues.TAG
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.Firebase
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.auth
 import com.nothing.secad.databinding.ActivitySignUpBinding
 
 class SignupActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySignUpBinding
+    private lateinit var auth: FirebaseAuth;
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySignUpBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        auth = Firebase.auth;
 
         //come with intent data to form
         val selectedParking = intent.getStringExtra("selectedParking")
@@ -32,6 +40,7 @@ class SignupActivity : AppCompatActivity() {
 
             if (validateInput()) {
                 Toast.makeText(this,"sucess",Toast.LENGTH_LONG).show()
+                createUser(binding.editTextTextEmailAddress.toString(), binding.editTextPassword.toString())
                 var intent = Intent(this,PaymentSendReceiveActivity::class.java)
                 startActivity(intent);
             }
@@ -73,8 +82,6 @@ class SignupActivity : AppCompatActivity() {
             isValid = false
         }
 
-        // Add more validation as needed
-
         return isValid
     }
     private fun isValidEmailFormat(email: String): Boolean {
@@ -88,5 +95,25 @@ class SignupActivity : AppCompatActivity() {
         binding.editTextTextEmailAddress.error = null
         binding.editTextPassword.error = null
         binding.editTextConformPassword.error = null
+    }
+
+    private fun createUser(email: String, password: String) {
+
+        auth.createUserWithEmailAndPassword(email, password)
+            .addOnCompleteListener(this) { task ->
+                if (task.isSuccessful) {
+                    // Sign in success, update UI with the signed-in user's information
+                    Log.d(TAG, "createUserWithEmail:success")
+                    val user = auth.currentUser
+                } else {
+                    // If sign in fails, display a message to the user.
+                    Log.w(TAG, "createUserWithEmail:failure", task.exception)
+                    Toast.makeText(
+                        baseContext,
+                        "Authentication failed." + task.exception,
+                        Toast.LENGTH_SHORT,
+                    ).show()
+                }
+            }
     }
 }
