@@ -4,11 +4,13 @@ import android.content.ContentValues.TAG
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.util.Log.*
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
+import com.nothing.secad.Society
 import com.nothing.secad.databinding.ActivitySignUpBinding
 
 class SignupActivity : AppCompatActivity() {
@@ -31,6 +33,7 @@ class SignupActivity : AppCompatActivity() {
         val selectedWaterTank = intent.getStringExtra("selectedWaterTank")
         val selectedTotalHome = intent.getStringExtra("selectedTotalHome")
 
+
         // Initialize your views
         val registerButton = binding.btnRegisterWelcome
 
@@ -40,8 +43,34 @@ class SignupActivity : AppCompatActivity() {
 
             if (validateInput()) {
                 Toast.makeText(this,"sucess",Toast.LENGTH_LONG).show()
-                createUser(binding.editTextTextEmailAddress.toString(), binding.editTextPassword.toString())
-                var intent = Intent(this,PaymentSendReceiveActivity::class.java)
+                Log.d(TAG, "Email is:" + binding.editTextTextEmailAddress.text)
+                createUser(binding.editTextTextEmailAddress.text.toString(), binding.editTextPassword.text.toString())
+                val intent = Intent(this,FirebaseUpload::class.java)
+
+                // Transfer Data
+//                val society: Society = Society (
+//                    name = binding.editTextTextSocietyName.text.toString(),
+//                    email = binding.editTextTextEmailAddress.text.toString(),
+//                    password =binding.editTextPassword.text.toString(),
+
+                    // TODO: take building
+//                    isBuilding = true,
+//
+//                    parking = selectedParking!!.toInt(),
+//                    elevators = selectedElevator!!.toInt(),
+//                    watchMan = selectedWatchman!!.toInt(),
+//                    garden = selectedGarden!!.toInt(),
+//                    temple = selectedTemple!!.toInt(),
+//                    waterTank = selectedWaterTank!!.toInt(),
+//                    totalHouses = selectedTotalHome!!.toInt(),
+//
+//                    // TODO: calculate price and add
+//                    expectedPricePerHouse = 1000
+//
+//                )
+//                intent.putExtra("society", society);
+
+                // TODO: add data to intent
                 startActivity(intent);
             }
         }
@@ -103,11 +132,11 @@ class SignupActivity : AppCompatActivity() {
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
                     // Sign in success, update UI with the signed-in user's information
-                    Log.d(TAG, "createUserWithEmail:success")
+                    d(TAG, "createUserWithEmail:success")
                     val user = auth.currentUser
                 } else {
                     // If sign in fails, display a message to the user.
-                    Log.w(TAG, "createUserWithEmail:failure", task.exception)
+                    w(TAG, "createUserWithEmail:failure", task.exception)
                     Toast.makeText(
                         baseContext,
                         "Authentication failed." + task.exception,
