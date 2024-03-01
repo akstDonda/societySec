@@ -3,6 +3,7 @@
     <string name="secretary">Secretary</string>
 
     <string-array name="spinner_form">
+        <item>--select no of--</item>
         <item>1</item>
         <item>2</item>
         <item>3</item>

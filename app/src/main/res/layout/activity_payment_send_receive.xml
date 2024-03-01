@@ -26,6 +26,7 @@
         android:orientation="vertical">
 
         <Button
+            android:id="@+id/recivePaymentToUser_btn"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_50sdp"
             android:backgroundTint="@color/primary_color"
@@ -37,6 +38,7 @@
             tools:ignore="HardcodedText"/>
 
         <Button
+            android:id="@+id/sendPaymentToAdmin_btn"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_50sdp"
             android:backgroundTint="@color/primary_color"

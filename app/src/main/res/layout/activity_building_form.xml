@@ -82,6 +82,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/hideElevator"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_40sdp"
                     android:layout_marginTop="@dimen/_8sdp"
@@ -254,6 +255,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/hideWaterTank"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_40sdp"
                     android:layout_marginTop="@dimen/_8sdp"

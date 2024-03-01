@@ -38,7 +38,8 @@ class DialogBoxBG : AppCompatActivity() {
         negativeButton.setOnClickListener {
             // Perform the desired action when Cancel is clicked
             Toast.makeText(this@DialogBoxBG,"row house", Toast.LENGTH_LONG).show();
-            val intent = Intent(this, RowHouseForm::class.java)
+            val intent = Intent(this, BuildingForm::class.java)
+            intent.putExtra("check", "abc")
             startActivity(intent)
             dialog.dismiss()
         }
