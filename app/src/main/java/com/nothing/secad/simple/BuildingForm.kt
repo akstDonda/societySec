@@ -53,6 +53,8 @@ class BuildingForm : AppCompatActivity() {
                         putExtra("selectedGarden", selectedGarden)
                         putExtra("selectedTemple", selectedTemple)
                         putExtra("selectedTotalHome", selectedTotalHome)
+                        putExtra("selectedElevator", "0")
+                        putExtra("selectedWaterTank", "0")
                     }
                     startActivity(intent)
                 }

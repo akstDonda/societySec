@@ -37,11 +37,9 @@ class FirebaseUpload : AppCompatActivity() {
         val emailAddress = intent.getStringExtra("emailAddress")
         val password = intent.getStringExtra("password")
 
-        var elevatorss=0;
-        if (selectedElevator == null){
-             elevatorss =0;
-        }else{
-             elevatorss = selectedElevator!!.toInt()
+        var elevators = 0;
+        if (selectedElevator != null){
+            elevators = selectedElevator.toInt()
         }
 
 
@@ -49,13 +47,13 @@ class FirebaseUpload : AppCompatActivity() {
                     name = societyName!!,
                     email = emailAddress!!,
                     password =password!!,
-                    uid = auth.currentUser ,
+                    uid = auth.currentUser!!.uid ,
 //
 //             // TODO: take building
                     isBuilding = true,
 //
                     parking = selectedParking!!.toInt(),
-                    elevators = elevatorss,
+                    elevators = elevators,
 
 
                     watchMan = selectedWatchman!!.toInt(),
@@ -68,6 +66,8 @@ class FirebaseUpload : AppCompatActivity() {
                     expectedPricePerHouse = 1000
 
         )
+
+        Log.d(TAG, "onCreate: ${society.uid}")
 
 
         // TODO: temp next activity

@@ -33,9 +33,9 @@ class SignupActivity : AppCompatActivity() {
         val selectedWaterTank = intent.getStringExtra("selectedWaterTank")
         val selectedTotalHome = intent.getStringExtra("selectedTotalHome")
 
-        var name = binding.editTextTextSocietyName.text.toString()
-        var email = binding.editTextTextEmailAddress.text.toString()
-        var password =binding.editTextPassword.text.toString()
+        var name: String;
+        var email: String;
+        var password: String;
 
 
         // Initialize your views
@@ -43,6 +43,11 @@ class SignupActivity : AppCompatActivity() {
 
         // Set click listener for the registerButton
         registerButton.setOnClickListener {
+
+
+            name = binding.editTextTextSocietyName.text.toString()
+            email = binding.editTextTextEmailAddress.text.toString()
+            password =binding.editTextPassword.text.toString()
             clearErrors() // Clear previous errors
 
             if (validateInput()) {

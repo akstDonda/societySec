@@ -6,8 +6,8 @@ data class Society(
     var name: String,
     var email: String,
     var password: String,
-    var uid: FirebaseUser?,
-
+    var uid: String,
+    @field:JvmField
     var isBuilding: Boolean,
 
     var parking: Number,
