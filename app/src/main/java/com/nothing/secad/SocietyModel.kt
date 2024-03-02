@@ -1,10 +1,12 @@
 package com.nothing.secad
 
+import com.google.firebase.auth.FirebaseUser
+
 data class Society(
     var name: String,
     var email: String,
     var password: String,
-    var uid: String,
+    var uid: FirebaseUser?,
 
     var isBuilding: Boolean,
 

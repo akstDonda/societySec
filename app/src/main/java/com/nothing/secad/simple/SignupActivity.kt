@@ -33,6 +33,10 @@ class SignupActivity : AppCompatActivity() {
         val selectedWaterTank = intent.getStringExtra("selectedWaterTank")
         val selectedTotalHome = intent.getStringExtra("selectedTotalHome")
 
+        var name = binding.editTextTextSocietyName.text.toString()
+        var email = binding.editTextTextEmailAddress.text.toString()
+        var password =binding.editTextPassword.text.toString()
+
 
         // Initialize your views
         val registerButton = binding.btnRegisterWelcome
@@ -42,7 +46,7 @@ class SignupActivity : AppCompatActivity() {
             clearErrors() // Clear previous errors
 
             if (validateInput()) {
-                Toast.makeText(this,"sucess",Toast.LENGTH_LONG).show()
+
                 Log.d(TAG, "Email is:" + binding.editTextTextEmailAddress.text)
                 createUser(binding.editTextTextEmailAddress.text.toString(), binding.editTextPassword.text.toString())
                 val intent = Intent(this,FirebaseUpload::class.java)
@@ -71,6 +75,19 @@ class SignupActivity : AppCompatActivity() {
 //                intent.putExtra("society", society);
 
                 // TODO: add data to intent
+
+                intent.putExtra("selectedParking", selectedParking)
+                intent.putExtra("selectedElevator", selectedElevator)
+                intent.putExtra("selectedWatchman", selectedWatchman)
+                intent.putExtra("selectedGarden", selectedGarden)
+                intent.putExtra("selectedTemple", selectedTemple)
+                intent.putExtra("selectedWaterTank", selectedWaterTank)
+                intent.putExtra("selectedTotalHome", selectedTotalHome)
+
+
+                intent.putExtra("societyName", name)
+                intent.putExtra("emailAddress", email)
+                intent.putExtra("password", password)
                 startActivity(intent);
             }
         }
