@@ -1,5 +1,6 @@
 package com.nothing.secad
 
+import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseUser
 
 data class Society(
@@ -19,4 +20,9 @@ data class Society(
     var totalHouses: Number,
 
     var expectedPricePerHouse: Number
+)
+
+data class Transaction (
+    var date: com.google.firebase.Timestamp,
+    var amount: Number
 )

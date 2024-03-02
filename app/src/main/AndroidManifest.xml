@@ -16,6 +16,9 @@
             android:name=".TransactionHistoryAdmin"
             android:exported="false" />
         <activity
+            android:name=".simple.PayToAdmin"
+            android:exported="false" />
+        <activity
             android:name=".simple.FirebaseUpload"
             android:exported="false" />
         <activity
@@ -44,9 +47,6 @@
             android:exported="false" />
         <activity
             android:name=".simple.LoginActivity"
-            android:exported="false" />
-        <activity
-            android:name=".simple.RowHouseForm"
             android:exported="false" />
         <activity
             android:name=".simple.DialogBoxBG"
