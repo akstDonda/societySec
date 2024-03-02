@@ -13,15 +13,18 @@
         android:theme="@style/Theme.SecAd"
         tools:targetApi="31">
         <activity
+            android:name=".TransactionHistoryAdmin"
+            android:exported="false" />
+        <activity
             android:name=".simple.FirebaseUpload"
             android:exported="false" />
         <activity
             android:name=".simple.demo"
-            android:exported="false"></activity>
+            android:exported="false" />
         <activity
             android:name=".HomeActivity"
             android:exported="false"
-            android:label="@string/title_activity_home"></activity>
+            android:label="@string/title_activity_home" />
         <activity
             android:name=".UnSuccess"
             android:exported="false" />
