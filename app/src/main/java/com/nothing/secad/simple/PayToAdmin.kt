@@ -31,7 +31,7 @@ class PayToAdmin : AppCompatActivity() {
         val db = Firebase.firestore
         db.collection("transactions")
             .document(Firebase.auth.currentUser?.uid ?: "")
-            .update(transaction.date.toString(), transaction)
+            .update(transaction.date.toDate().toString(), transaction)
             // Success
             .addOnSuccessListener {
                 Log.d(ContentValues.TAG, "DocumentSnapshot successfully written!")
