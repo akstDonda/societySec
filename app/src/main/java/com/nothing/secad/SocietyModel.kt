@@ -2,6 +2,7 @@ package com.nothing.secad
 
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseUser
+import java.util.Date
 
 data class Society(
     var name: String,
@@ -20,10 +21,19 @@ data class Society(
     var totalHouses: Number,
 
     var expectedPricePerHouse: Number,
-    var memberIDs: ArrayList<String>
+    var memberIDs: ArrayList<String>,
+
+    var complains: ArrayList<Complain>
 )
 
 data class Transaction (
     var date: com.google.firebase.Timestamp,
     var amount: Number
+)
+
+data class Complain (
+    var date: Date,
+    var description: String,
+    var approved: Boolean,
+    var resolved: Boolean
 )
