@@ -63,7 +63,8 @@ class FirebaseUpload : AppCompatActivity() {
                     totalHouses = selectedTotalHome!!.toInt(),
 
                     // TODO: calculate price and add
-                    expectedPricePerHouse = 1000
+                    expectedPricePerHouse = 1000,
+                    memberIDs = ArrayList<String>()
 
         )
 

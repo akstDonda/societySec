@@ -19,7 +19,8 @@ data class Society(
     var waterTank: Number,
     var totalHouses: Number,
 
-    var expectedPricePerHouse: Number
+    var expectedPricePerHouse: Number,
+    var memberIDs: ArrayList<String>
 )
 
 data class Transaction (
