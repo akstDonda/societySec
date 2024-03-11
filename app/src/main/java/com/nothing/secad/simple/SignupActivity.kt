@@ -32,10 +32,29 @@ class SignupActivity : AppCompatActivity() {
         val selectedTemple = intent.getStringExtra("selectedTemple")
         val selectedWaterTank = intent.getStringExtra("selectedWaterTank")
         val selectedTotalHome = intent.getStringExtra("selectedTotalHome")
+        val totalAmount = intent.getStringExtra("totalAmount")
+     //   Toast.makeText(this, "$selectedParking + $selectedElevator + $selectedWatchman + $selectedGarden + $selectedTemple + $selectedWaterTank + $selectedTotalHome ,$totalAmount", Toast.LENGTH_SHORT).show()
+            val perHomePrice = totalAmount!!.toInt()/selectedTotalHome!!.toInt();
+            Toast.makeText(this, "Total amount: $perHomePrice", Toast.LENGTH_SHORT).show()
+
 
         var name: String;
         var email: String;
         var password: String;
+
+
+        // TODO: add data to intent
+        var intentNew = Intent(this, FirebaseUpload::class.java)
+
+        intentNew.putExtra("selectedParking", selectedParking)
+        intentNew.putExtra("selectedElevator", selectedElevator)
+        intentNew.putExtra("selectedWatchman", selectedWatchman)
+        intentNew.putExtra("selectedGarden", selectedGarden)
+        intentNew.putExtra("selectedTemple", selectedTemple)
+        intentNew.putExtra("selectedWaterTank", selectedWaterTank)
+        intentNew.putExtra("selectedTotalHome", selectedTotalHome)
+
+
 
 
         // Initialize your views
@@ -48,12 +67,17 @@ class SignupActivity : AppCompatActivity() {
             name = binding.editTextTextSocietyName.text.toString()
             email = binding.editTextTextEmailAddress.text.toString()
             password =binding.editTextPassword.text.toString()
+
+
+            intentNew.putExtra("societyName", name)
+            intentNew.putExtra("emailAddress", email)
+            intentNew.putExtra("password", password)
             clearErrors() // Clear previous errors
 
             if (validateInput()) {
 
                 Log.d(TAG, "Email is:" + binding.editTextTextEmailAddress.text)
-                createUser(binding.editTextTextEmailAddress.text.toString(), binding.editTextPassword.text.toString())
+                createUser(binding.editTextTextEmailAddress.text.toString(), binding.editTextPassword.text.toString(), intentNew)
                 val intent = Intent(this,FirebaseUpload::class.java)
 
                 // Transfer Data
@@ -79,21 +103,9 @@ class SignupActivity : AppCompatActivity() {
 //                )
 //                intent.putExtra("society", society);
 
-                // TODO: add data to intent
-
-                intent.putExtra("selectedParking", selectedParking)
-                intent.putExtra("selectedElevator", selectedElevator)
-                intent.putExtra("selectedWatchman", selectedWatchman)
-                intent.putExtra("selectedGarden", selectedGarden)
-                intent.putExtra("selectedTemple", selectedTemple)
-                intent.putExtra("selectedWaterTank", selectedWaterTank)
-                intent.putExtra("selectedTotalHome", selectedTotalHome)
 
 
-                intent.putExtra("societyName", name)
-                intent.putExtra("emailAddress", email)
-                intent.putExtra("password", password)
-                startActivity(intent);
+
             }
         }
     }
@@ -148,7 +160,7 @@ class SignupActivity : AppCompatActivity() {
         binding.editTextConformPassword.error = null
     }
 
-    private fun createUser(email: String, password: String) {
+    private fun createUser(email: String, password: String, intent: Intent) {
 
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
@@ -156,6 +168,7 @@ class SignupActivity : AppCompatActivity() {
                     // Sign in success, update UI with the signed-in user's information
                     d(TAG, "createUserWithEmail:success")
                     val user = auth.currentUser
+                    startActivity(intent)
                 } else {
                     // If sign in fails, display a message to the user.
                     w(TAG, "createUserWithEmail:failure", task.exception)

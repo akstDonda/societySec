@@ -13,6 +13,15 @@
         android:theme="@style/Theme.SecAd"
         tools:targetApi="31">
         <activity
+            android:name=".meeting.user.UserMeetingConsforanceActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".meeting.user.UseMeetingMainActivity"
+            android:exported="true" >
+
+        </activity>
+        <activity
             android:name=".TransactionHistoryAdmin"
             android:exported="false" />
         <activity
@@ -68,6 +77,7 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
         <activity
             android:name=".meeting.ZoomMainActivity"

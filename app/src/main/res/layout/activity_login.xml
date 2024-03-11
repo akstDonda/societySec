@@ -69,7 +69,7 @@
         android:layout_weight="3.5">
 
         <EditText
-            android:id="@+id/editTextTextEmailAddress"
+            android:id="@+id/email_login_edt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_15sdp"
@@ -82,7 +82,7 @@
             tools:ignore="HardcodedText" />
 
         <EditText
-            android:id="@+id/editTextPassword"
+            android:id="@+id/password_login_edt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_15sdp"
@@ -97,7 +97,7 @@
 
 
         <Button
-            android:id="@+id/btn_Register_welcome"
+            android:id="@+id/login_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_13sdp"

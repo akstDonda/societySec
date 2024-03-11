@@ -9,6 +9,7 @@ import android.widget.Toast
 import com.google.firebase.Firebase
 import com.google.firebase.auth.auth
 import com.google.firebase.firestore.firestore
+import com.nothing.secad.HomeActivity
 import com.nothing.secad.Society
 import com.nothing.secad.databinding.ActivityFirebaseUploadBinding
 
@@ -42,7 +43,6 @@ class FirebaseUpload : AppCompatActivity() {
             elevators = selectedElevator.toInt()
         }
 
-
         val society: Society = Society (
                     name = societyName!!,
                     email = emailAddress!!,
@@ -73,7 +73,7 @@ class FirebaseUpload : AppCompatActivity() {
 
 
         // TODO: temp next activity
-        val nextIntent = Intent(this, PaymentSendReceiveActivity::class.java)
+        val nextIntent = Intent(this, HomeActivity::class.java)
 
         // Init database
         val db = Firebase.firestore;

@@ -7,13 +7,18 @@ import java.util.Date
 
 class Transaction(userId: String,  amountOfTran: Number) {
     var id: String = Date().time.toString()
-    private var amount: Number = amountOfTran
-    private var date: Date = Date()
-    private var completed: Boolean = false
+    var amount: Number = amountOfTran
+    var date: Date = Date()
+    var completed: Boolean = false
 
     init {
         val fireStore = Firebase.firestore
-        fireStore.collection("transactions").document(userId).update(id, this)
+        fireStore.collection("member").document(userId).collection("transactions").add(hashMapOf(
+            "id" to id,
+            "amount" to amount,
+            "date" to date,
+            "completed" to completed,
+        ))
     }
 }
 

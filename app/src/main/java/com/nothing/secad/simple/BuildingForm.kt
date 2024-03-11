@@ -2,6 +2,7 @@ package com.nothing.secad.simple
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import android.widget.Toast
@@ -55,6 +56,10 @@ class BuildingForm : AppCompatActivity() {
                         putExtra("selectedTotalHome", selectedTotalHome)
                         putExtra("selectedElevator", "0")
                         putExtra("selectedWaterTank", "0")
+                        val totalAmount2:Int=calculator(selectedParking,selectedWatchman,selectedGarden,selectedTemple,"0","0",selectedTotalHome)
+                        val totalAmount:String = totalAmount2.toString()
+                        putExtra("totalAmount",totalAmount)
+
                     }
                     startActivity(intent)
                 }
@@ -74,6 +79,8 @@ class BuildingForm : AppCompatActivity() {
                         putExtra("selectedTemple", selectedTemple)
                         putExtra("selectedWaterTank", selectedWaterTank)
                         putExtra("selectedTotalHome", selectedTotalHome)
+                        val totalAmount:Int=calculator(selectedParking,selectedWatchman,selectedGarden,selectedTemple,selectedWaterTank,selectedElevator,selectedTotalHome)
+                        putExtra("totalAmount",totalAmount)
                     }
 
                     startActivity(intent)
@@ -103,4 +110,27 @@ class BuildingForm : AppCompatActivity() {
         val itemsArray = resources.getStringArray(R.array.spinner_form)
         return itemsArray.getOrNull(selectedIndex) ?: ""
     }
+
+    private fun calculator(parking:String,whtchman:String,garden:String,temple:String,waterTank:String,elevator:String,totalHome:String):Int{
+
+        var parkingInt = parking.toInt()
+        var whtchmanInt = whtchman.toInt()
+        var gardenInt = garden.toInt()
+        var templeInt = temple.toInt()
+        var waterTankInt = waterTank.toInt()
+        var elevatorInt = elevator.toInt()
+        var totalHomeInt = totalHome.toInt()
+
+
+        var parking_rs:Int = parkingInt * 2000;
+        var whtchman_rs:Int = whtchmanInt * 10000;
+        var elevator_rs:Int = elevatorInt * 5000;
+        var garden_rs:Int = gardenInt * 3000;
+        var temple_rs:Int = templeInt * 1000;
+        var waterTank_rs:Int = waterTankInt * 1000;
+        var total_rs:Int = parking_rs + whtchman_rs + elevator_rs + garden_rs + temple_rs + waterTank_rs;
+        Log.e("$$$$$$$$$",""+total_rs)
+        return total_rs;
+    }
+
 }

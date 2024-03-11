@@ -7,6 +7,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.widget.Toast
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
+import com.nothing.secad.HomeActivity
 import com.nothing.secad.R
 
 class splash_MainActivity : AppCompatActivity() {
@@ -18,8 +21,13 @@ class splash_MainActivity : AppCompatActivity() {
         if (isNetworkAvailable()) {
             // If internet is available, start the main activity after the splash timeout
             Handler().postDelayed({
-                startActivity(Intent(this, welcome_signUp_login::class.java))
-                finish()
+                var currentUser: FirebaseUser? = FirebaseAuth.getInstance().currentUser
+                if (currentUser != null) {
+                    intentFun(HomeActivity::class.java)
+                    finish()
+                }else{
+                    intentFun(welcome_signUp_login::class.java)
+                }
             }, 1200)
         } else {
             // Handle the case when there is no internet connectivity
@@ -37,5 +45,16 @@ class splash_MainActivity : AppCompatActivity() {
             getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val networkInfo = connectivityManager.activeNetworkInfo
         return networkInfo != null && networkInfo.isConnected
+    }
+
+    fun intentFun(destination : Class<*>){
+        var intent = Intent(this, destination)
+        startActivity(intent)
+
+    }
+    //toast
+    fun toastFun(message : String){
+        var toast = Toast.makeText(this, message, Toast.LENGTH_LONG).show()
+
     }
 }
