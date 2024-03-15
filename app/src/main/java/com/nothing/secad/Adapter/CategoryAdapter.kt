@@ -11,9 +11,24 @@ import com.nothing.secad.R
 
 class CategoryAdapter(private val categoryList: List<CategoryModel>) : RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>() {
 
-    class CategoryViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    interface OnItemClickListener {
+        fun onItemClick(position: Int)
+    }
+
+    var onItemClickListener: OnItemClickListener? = null
+
+    // Remove 'inner' keyword from CategoryViewHolder
+    inner class CategoryViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
         val imageView: ImageView = itemView.findViewById(R.id.img)
         val textView: TextView = itemView.findViewById(R.id.txt)
+
+        init {
+            itemView.setOnClickListener(this)
+        }
+
+        override fun onClick(v: View?) {
+            onItemClickListener?.onItemClick(adapterPosition)
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryViewHolder {
@@ -31,3 +46,4 @@ class CategoryAdapter(private val categoryList: List<CategoryModel>) : RecyclerV
 
     override fun getItemCount() = categoryList.size
 }
+

@@ -1,9 +1,12 @@
 package com.nothing.secad.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import android.window.SplashScreen
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -15,6 +18,7 @@ import com.nothing.secad.Adapter.CategoryAdapter
 import com.nothing.secad.R
 import com.nothing.secad.model.CategoryModel
 import com.nothing.secad.databinding.FragmentDashbordBinding
+import com.nothing.secad.meeting.ZoomMainActivity
 import java.util.Calendar
 
 class DashbordFragment : Fragment() {
@@ -39,24 +43,51 @@ class DashbordFragment : Fragment() {
         // Dummy data for categories
         val categoryList = listOf(
             CategoryModel(R.drawable.money_transfer_image, "meeting"),
+            CategoryModel(R.drawable.baseline_add_24, "complain"),
+            CategoryModel(R.drawable.plain_dollar, "payment"),
             CategoryModel(R.drawable.money_transfer_image, "Category"),
             CategoryModel(R.drawable.money_transfer_image, "Category"),
-            CategoryModel(R.drawable.money_transfer_image, "Category"),
-            CategoryModel(R.drawable.money_transfer_image, "Category"),
-            CategoryModel(R.drawable.money_transfer_image, "Category"),
-
-
-            // Add more categories as needed
+            CategoryModel(R.drawable.money_transfer_image, "Category")
         )
 
         // Create and set up the CategoryAdapter
         val categoryAdapter = CategoryAdapter(categoryList)
 
-        // Set up the RecyclerView with a LinearLayoutManager
+        // Set the item click listener for the adapter
+        categoryAdapter.onItemClickListener = object : CategoryAdapter.OnItemClickListener {
+            override fun onItemClick(position: Int) {
+                when (position) {
+                    0 -> {
+                        Toast.makeText(requireContext(),"this",Toast.LENGTH_SHORT).show()
+                        intentFun(ZoomMainActivity::class.java)
+                    }
+                    1 -> {
+                        // Replace the current fragment with XYZFragment
+                        Toast.makeText(requireContext(),"this",Toast.LENGTH_SHORT).show()
+                    }
+                    2 -> {
+                        Toast.makeText(requireContext(),"this",Toast.LENGTH_SHORT).show()
+                    }
+                    4 -> {
+                        Toast.makeText(requireContext(),"this",Toast.LENGTH_SHORT).show()
+                    }
+                    else -> {
+                        // Handle other positions if necessary
+                    }
+                }
+            }
+        }
+
+        // Set up the RecyclerView with a GridLayoutManager
         binding?.categoryRv?.apply {
             layoutManager = GridLayoutManager(context, 3) // 3 is the number of columns
             adapter = categoryAdapter
         }
+    }
+
+    fun intentFun(destination: Class<*>) {
+        val intent = Intent(requireContext(), destination)
+        startActivity(intent)
     }
 
     // ... Rest of your code

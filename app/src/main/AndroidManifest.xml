@@ -10,17 +10,26 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.SecAd"
+        android:theme="@style/Base.Theme.SecAd"
         tools:targetApi="31">
+        <activity
+            android:name=".complain.ComplainActivity"
+            android:exported="true">
+
+        </activity>
+
+
+        <activity
+            android:name=".model.complainModel"
+            android:exported="false"
+            android:label="@string/title_activity_complain_model"
+            android:theme="@style/Base.Theme.SecAd" />
         <activity
             android:name=".meeting.user.UserMeetingConsforanceActivity"
             android:exported="false" />
-
         <activity
             android:name=".meeting.user.UseMeetingMainActivity"
-            android:exported="true" >
-
-        </activity>
+            android:exported="true" />
         <activity
             android:name=".TransactionHistoryAdmin"
             android:exported="false" />
