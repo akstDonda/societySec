@@ -15,10 +15,13 @@ import com.codebyashish.autoimageslider.Enums.ImageScaleType
 import com.codebyashish.autoimageslider.Models.ImageSlidesModel
 import com.google.firebase.firestore.FirebaseFirestore
 import com.nothing.secad.Adapter.CategoryAdapter
+import com.nothing.secad.Complain
 import com.nothing.secad.R
+import com.nothing.secad.complain.ComplainActivity
 import com.nothing.secad.model.CategoryModel
 import com.nothing.secad.databinding.FragmentDashbordBinding
 import com.nothing.secad.meeting.ZoomMainActivity
+import com.nothing.secad.simple.PaymentSendReceiveActivity
 import java.util.Calendar
 
 class DashbordFragment : Fragment() {
@@ -43,7 +46,7 @@ class DashbordFragment : Fragment() {
         // Dummy data for categories
         val categoryList = listOf(
             CategoryModel(R.drawable.money_transfer_image, "meeting"),
-            CategoryModel(R.drawable.baseline_add_24, "complain"),
+            CategoryModel(R.drawable.baseline_add_complain_24, "complain"),
             CategoryModel(R.drawable.plain_dollar, "payment"),
             CategoryModel(R.drawable.money_transfer_image, "Category"),
             CategoryModel(R.drawable.money_transfer_image, "Category"),
@@ -58,15 +61,16 @@ class DashbordFragment : Fragment() {
             override fun onItemClick(position: Int) {
                 when (position) {
                     0 -> {
-                        Toast.makeText(requireContext(),"this",Toast.LENGTH_SHORT).show()
+                        Toast.makeText(requireContext(),"meeting",Toast.LENGTH_SHORT).show()
                         intentFun(ZoomMainActivity::class.java)
                     }
                     1 -> {
                         // Replace the current fragment with XYZFragment
-                        Toast.makeText(requireContext(),"this",Toast.LENGTH_SHORT).show()
+                        intentFun(ComplainActivity::class.java)
+
                     }
                     2 -> {
-                        Toast.makeText(requireContext(),"this",Toast.LENGTH_SHORT).show()
+                        intentFun(PaymentSendReceiveActivity::class.java)
                     }
                     4 -> {
                         Toast.makeText(requireContext(),"this",Toast.LENGTH_SHORT).show()

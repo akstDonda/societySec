@@ -317,28 +317,45 @@
                         android:textSize="@dimen/_22ssp"
                         android:fontFamily="@font/bebas_neue"/>
 
-                    <com.skydoves.powerspinner.PowerSpinnerView
-                        android:id="@+id/noOfTotalHome_building"
+<!--                    <com.skydoves.powerspinner.PowerSpinnerView-->
+<!--                        android:id="@+id/noOfTotalHome_building"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:background="@color/primary_color"-->
+<!--                        android:gravity="center"-->
+<!--                        android:hint="Number Of House"-->
+<!--                        android:padding="10dp"-->
+<!--                        android:textColor="@color/white"-->
+<!--                        android:textColorHint="@color/white"-->
+<!--                        android:textSize="14.5sp"-->
+<!--                        app:spinner_arrow_gravity="end"-->
+<!--                        android:layout_margin="@dimen/_5sdp"-->
+<!--                        app:spinner_arrow_padding="8dp"-->
+<!--                        app:spinner_divider_color="@color/white"-->
+<!--                        app:spinner_divider_show="true"-->
+<!--                        app:spinner_divider_size="0.4dp"-->
+<!--                        app:spinner_item_array="@array/spinner_form"-->
+<!--                        app:spinner_item_height="46dp"-->
+<!--                        app:spinner_popup_animation="dropdown"-->
+<!--                        app:spinner_popup_background="@color/primary_color"-->
+<!--                        app:spinner_popup_elevation="14dp" />-->
+                    <EditText
+                        android:id="@+id/noOfTotalHome_building_edt"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@color/primary_color"
-                        android:gravity="center"
-                        android:hint="Number Of Parking"
+                        android:hint="Number Of House"
+                        android:background="@drawable/edit_text_background"
+                        android:inputType="number"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:layout_marginStart="@dimen/_7sdp"
+                        android:layout_marginEnd="@dimen/_7sdp"
                         android:padding="10dp"
-                        android:textColor="@color/white"
-                        android:textColorHint="@color/white"
+                        android:textColor="@color/primary_color"
+                        android:textColorHint="@color/primary_color"
                         android:textSize="14.5sp"
-                        app:spinner_arrow_gravity="end"
-                        android:layout_margin="@dimen/_5sdp"
                         app:spinner_arrow_padding="8dp"
-                        app:spinner_divider_color="@color/white"
-                        app:spinner_divider_show="true"
-                        app:spinner_divider_size="0.4dp"
-                        app:spinner_item_array="@array/spinner_form"
-                        app:spinner_item_height="46dp"
-                        app:spinner_popup_animation="dropdown"
-                        app:spinner_popup_background="@color/primary_color"
-                        app:spinner_popup_elevation="14dp" />
+
+                        />
                 </LinearLayout>
 
 

@@ -27,7 +27,6 @@ class BuildingForm : AppCompatActivity() {
         setupPowerSpinner(binding.noOfGardenBuilding)
         setupPowerSpinner(binding.noOfTempleBuilding)
         setupPowerSpinner(binding.noOfWaterTankBuilding)
-        setupPowerSpinner(binding.noOfTotalHomeBuilding)
         setupPowerSpinner(binding.noOfElevatorBuilding)
 
         binding.btnBuildingSignUp.setOnClickListener {
@@ -37,7 +36,7 @@ class BuildingForm : AppCompatActivity() {
             val selectedGarden = getSelectedItem(binding.noOfGardenBuilding)
             val selectedTemple = getSelectedItem(binding.noOfTempleBuilding)
             val selectedWaterTank = getSelectedItem(binding.noOfWaterTankBuilding)
-            val selectedTotalHome = getSelectedItem(binding.noOfTotalHomeBuilding)
+            val selectedTotalHome = binding.noOfTotalHomeBuildingEdt.text.toString()
 
 
             if(intent.getStringExtra("check").toString() == "abc"){
@@ -66,7 +65,7 @@ class BuildingForm : AppCompatActivity() {
             }else{
                 if (selectedParking  == "--select no of--" || selectedElevator  == "--select no of--" || selectedWatchman  == "--select no of--"
                     || selectedGarden  == "--select no of--" || selectedTemple  == "--select no of--" || selectedWaterTank  == "--select no of--"
-                    || selectedTotalHome  == "--select no of--") {
+                    || selectedTotalHome  == "") {
                     showToast("Please fill all field")
                     // You can also prevent further actions here or show an error message
                 } else {
@@ -79,7 +78,8 @@ class BuildingForm : AppCompatActivity() {
                         putExtra("selectedTemple", selectedTemple)
                         putExtra("selectedWaterTank", selectedWaterTank)
                         putExtra("selectedTotalHome", selectedTotalHome)
-                        val totalAmount:Int=calculator(selectedParking,selectedWatchman,selectedGarden,selectedTemple,selectedWaterTank,selectedElevator,selectedTotalHome)
+                        val totalAmount2:Int=calculator(selectedParking,selectedWatchman,selectedGarden,selectedTemple,selectedWaterTank,selectedElevator,selectedTotalHome)
+                        val totalAmount:String = totalAmount2.toString()
                         putExtra("totalAmount",totalAmount)
                     }
 

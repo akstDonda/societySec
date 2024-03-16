@@ -49,7 +49,9 @@ class ReceivePaymentUser : AppCompatActivity() {
                         // Print all member names
 
                         for (member in membersList) {
-                            Transaction("$member",1000)
+                            var amountMain = binding.amountMaintenanceEdt.text.toString()
+                            var amountMainInt = amountMain.toInt()
+                            Transaction("$member",amountMainInt)
                         }
                     } else {
                         println("Members field is null")
