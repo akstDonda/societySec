@@ -8,6 +8,7 @@ import android.util.Log
 import android.widget.Toast
 import com.google.firebase.Firebase
 import com.google.firebase.auth.auth
+import com.nothing.secad.HomeActivity
 import com.nothing.secad.R
 import com.nothing.secad.databinding.ActivityDemoBinding
 import com.nothing.secad.databinding.ActivityLoginBinding
@@ -37,8 +38,9 @@ class LoginActivity : AppCompatActivity() {
                         Log.d(TAG, "signInWithEmail:success")
                         val user = auth.currentUser
 
-                        var intent = Intent(this@LoginActivity,PaymentSendReceiveActivity::class.java)
+                        var intent = Intent(this@LoginActivity,HomeActivity::class.java)
                         startActivity(intent)
+                        finish()
                     } else {
                         // If sign in fails, display a message to the user.
                         Log.w(TAG, "signInWithEmail:failure", task.exception)

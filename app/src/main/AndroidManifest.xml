@@ -13,12 +13,14 @@
         android:theme="@style/Base.Theme.SecAd"
         tools:targetApi="31">
         <activity
+            android:name=".setting.CustomerCare"
+            android:exported="false" />
+        <activity
+            android:name=".ChangePasswordActivity"
+            android:exported="false" />
+        <activity
             android:name=".complain.ComplainActivity"
-            android:exported="true">
-
-        </activity>
-
-
+            android:exported="true" />
         <activity
             android:name=".model.complainModel"
             android:exported="false"
@@ -86,7 +88,6 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
         <activity
             android:name=".meeting.ZoomMainActivity"
