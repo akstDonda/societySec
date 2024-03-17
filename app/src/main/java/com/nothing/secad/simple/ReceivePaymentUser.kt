@@ -40,7 +40,7 @@ class ReceivePaymentUser : AppCompatActivity() {
             .addOnSuccessListener { document ->
                 if (document != null && document.exists()) {
                     // Access the "members" field as an ArrayList
-                    val membersList = document.get("members") as ArrayList<*>?
+                    val membersList = document.get("memberIDs") as ArrayList<*>?
 
                     Log.d(TAG,  "Members: $membersList")
 

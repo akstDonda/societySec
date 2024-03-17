@@ -1,5 +1,6 @@
 package com.nothing.secad.Adapter
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -7,12 +8,16 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.google.firebase.Firebase
+import com.google.firebase.auth.auth
+import com.google.firebase.firestore.firestore
 import com.nothing.secad.R
 import com.nothing.secad.model.complainModel
 import java.text.SimpleDateFormat
 import java.util.*
 
-class ComplainAdapter(private val complainList: List<complainModel>) :
+class ComplainAdapter(private var complainList: List<complainModel>, var context: Context) :
     RecyclerView.Adapter<ComplainAdapter.ComplainViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ComplainViewHolder {
@@ -23,21 +28,45 @@ class ComplainAdapter(private val complainList: List<complainModel>) :
 
     override fun onBindViewHolder(holder: ComplainViewHolder, position: Int) {
         val currentItem = complainList[position]
-        holder.imgView.setImageResource(currentItem.imgUrl)
+        holder.imgView.setImageResource(R.drawable.money_transfer_image)
         holder.typeTextView.text = "Type: ${currentItem.type}"
         holder.titleTextView.text = "Title: ${currentItem.title}"
         holder.dateTextView.text = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(currentItem.date)
         holder.statusTextView.text = "Status: ${currentItem.status}"
         holder.descTextView.text = "Description: ${currentItem.description}"
 
+        fun hideButtons() {
+            holder.aproveButton.visibility = View.GONE
+            holder.unAproveButton.visibility = View.GONE
+        }
+
+        fun updateStatus(status: String) {
+            holder.statusTextView.text = "Status: $status"
+        }
         // Implement button click listeners here if needed
         holder.aproveButton.setOnClickListener {
-            // Handle approve button click
+            updateComplain(currentItem.itemId, true)
+            hideButtons()
+            updateStatus("Approved!")
         }
 
         holder.unAproveButton.setOnClickListener {
-            // Handle unapprove button click
+            updateComplain(currentItem.itemId, false)
+            hideButtons()
+            updateStatus("Rejected!")
         }
+
+
+        if (currentItem.status != "pending") {
+            hideButtons()
+        }
+
+        Glide.with(context)
+            .load(currentItem.imgUrl)
+            .placeholder(R.drawable.logo_black_primary) // Optional placeholder image while loading
+            .error(R.drawable.logo_black_primary) // Optional error image if loading fails
+            .centerCrop()
+            .into(holder.imgView)
     }
 
     override fun getItemCount() = complainList.size
@@ -55,5 +84,28 @@ class ComplainAdapter(private val complainList: List<complainModel>) :
         var unAproveButton:Button = itemView.findViewById(R.id.complain_un_aproove_btn)
 
 
+    }
+
+    fun addData(dummyData : List<complainModel>) {
+        complainList = dummyData
+        notifyDataSetChanged()
+    }
+}
+
+
+fun updateComplain(complainId: String, approved: Boolean) {
+    var db = Firebase.firestore
+    val userid = Firebase.auth.currentUser!!.uid
+
+    if (userid.isNullOrEmpty()) {
+        return
+    }
+    if (approved) {
+        db.collection("societies").document(userid).collection("complains").document(complainId)
+            .update("approved", true)
+    }
+    else {
+        db.collection("societies").document(userid).collection("complains").document(complainId)
+            .update("rejected", true)
     }
 }
