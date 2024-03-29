@@ -28,6 +28,12 @@ class SendPaymentAdmin : AppCompatActivity() {
             startActivity(intent)
         }
 
+        //get request to admin
+        binding.RecivePaymentRequestToAdmin.setOnClickListener() {
+            val intent = Intent(this, TransactionHistoryAdmin::class.java)
+            startActivity(intent)
+        }
+
 
         //show total amount
         fetchCurrentAmount()

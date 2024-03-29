@@ -5,12 +5,31 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".TransactionHistoryAdmin"
-    android:layout_margin="@dimen/_10sdp">
+    android:background="@color/primary_color"
+    android:orientation="vertical">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardElevation="@dimen/_5sdp"
+        app:cardCornerRadius="@dimen/_5sdp"
+        android:layout_marginVertical="@dimen/_10sdp">
+
+            <SearchView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:queryHint="Search Transaction Here"
+                android:layout_marginBottom="10dp"
+                android:iconifiedByDefault="false"
+
+                />
+    </androidx.cardview.widget.CardView>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/transaction_history_rv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_margin="@dimen/_10sdp"
         />
 
 </LinearLayout>
