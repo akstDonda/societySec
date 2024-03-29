@@ -31,7 +31,7 @@
                 android:id="@+id/transaction_status"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Status : true"
+                android:text="Status : false"
                 android:textSize="@dimen/_25ssp"/>
             <Button
                 android:id="@+id/transaction_to_pay_btn"

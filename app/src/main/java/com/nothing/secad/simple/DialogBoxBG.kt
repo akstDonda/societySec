@@ -27,6 +27,8 @@ class DialogBoxBG : AppCompatActivity() {
         val negativeButton: Button = dialogView.findViewById(R.id.btn_dialogRowHouse)
 
         val dialog: AlertDialog = builder.create()
+        dialog.setCancelable(false)
+        
 
         positiveButton.setOnClickListener {
             Toast.makeText(this@DialogBoxBG,"building", Toast.LENGTH_LONG).show();

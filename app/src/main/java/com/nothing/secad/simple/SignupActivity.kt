@@ -1,26 +1,42 @@
 package com.nothing.secad.simple
 
+import android.app.Dialog
 import android.content.ContentValues.TAG
 import android.content.Intent
 import android.os.Bundle
+import android.text.method.HideReturnsTransformationMethod
+import android.text.method.PasswordTransformationMethod
 import android.util.Log
 import android.util.Log.*
+import android.view.MotionEvent
+import android.view.View
+import android.view.Window
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
+import com.nothing.secad.R
 import com.nothing.secad.Society
 import com.nothing.secad.databinding.ActivitySignUpBinding
+import com.zipow.videobox.LoginActivity
 
 class SignupActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySignUpBinding
     private lateinit var auth: FirebaseAuth;
+    private var totalAmount : Int = 0;
+    var perHomePrice : Int = 0;
+    var passwordVisibleMain:Boolean = false;
+    var passwordVisible:Boolean = false;
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySignUpBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+
 
         auth = Firebase.auth;
 
@@ -32,10 +48,11 @@ class SignupActivity : AppCompatActivity() {
         val selectedTemple = intent.getStringExtra("selectedTemple")
         val selectedWaterTank = intent.getStringExtra("selectedWaterTank")
         val selectedTotalHome = intent.getStringExtra("selectedTotalHome")
-        val totalAmount = intent.getStringExtra("totalAmount")
+        totalAmount = intent.getStringExtra("totalAmount")!!.toInt()
      //   Toast.makeText(this, "$selectedParking + $selectedElevator + $selectedWatchman + $selectedGarden + $selectedTemple + $selectedWaterTank + $selectedTotalHome ,$totalAmount", Toast.LENGTH_SHORT).show()
-            val perHomePrice = totalAmount!!.toInt()/selectedTotalHome!!.toInt();
+             perHomePrice = totalAmount!!.toInt()/selectedTotalHome!!.toInt()
             Toast.makeText(this, "Total amount: $perHomePrice", Toast.LENGTH_SHORT).show()
+        customDialog()
 
 
         var name: String;
@@ -74,6 +91,54 @@ class SignupActivity : AppCompatActivity() {
             intentNew.putExtra("password", password)
             clearErrors() // Clear previous errors
 
+
+            binding.editTextPassword.setOnTouchListener { v, event ->
+
+                val Right = 2
+                if (event.action == MotionEvent.ACTION_UP) {
+                    if (event.rawX >= binding.editTextPassword.right - binding.editTextPassword.compoundDrawables[Right].bounds.width()) {
+                        val selection = binding.editTextPassword.selectionEnd
+                        if (passwordVisibleMain) {
+                            binding.editTextPassword.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.baseline_remove_red_eye_24, 0)
+                            binding.editTextPassword.transformationMethod = PasswordTransformationMethod.getInstance()
+                            passwordVisibleMain = false
+                        } else {
+                            binding.editTextPassword.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.baseline_remove_red_eye_24, 0)
+                            binding.editTextPassword.transformationMethod = HideReturnsTransformationMethod.getInstance()
+                            passwordVisibleMain = true
+                        }
+                        binding.editTextPassword.setSelection(selection)
+                        return@setOnTouchListener true
+                    }
+                }
+                false // Consume the touch event
+            }
+
+            //hide and show conform password
+            binding.editTextConformPassword.setOnTouchListener { v, event ->
+
+                val Right = 2
+                if (event.action == MotionEvent.ACTION_UP) {
+                    if (event.rawX >= binding.editTextConformPassword.right - binding.editTextConformPassword.compoundDrawables[Right].bounds.width()) {
+                        val selection = binding.editTextConformPassword.selectionEnd
+                        if (passwordVisible) {
+                            binding.editTextConformPassword.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.baseline_remove_red_eye_24, 0)
+                            binding.editTextConformPassword.transformationMethod = PasswordTransformationMethod.getInstance()
+                            passwordVisible = false
+                        } else {
+                            binding.editTextConformPassword.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.baseline_remove_red_eye_24, 0)
+                            binding.editTextConformPassword.transformationMethod = HideReturnsTransformationMethod.getInstance()
+                            passwordVisible = true
+                        }
+                        binding.editTextConformPassword.setSelection(selection)
+                        return@setOnTouchListener true
+                    }
+                }
+                false // Consume the touch event
+            }
+
+
+
             if (validateInput()) {
 
                 Log.d(TAG, "Email is:" + binding.editTextTextEmailAddress.text)
@@ -108,6 +173,48 @@ class SignupActivity : AppCompatActivity() {
 
             }
         }
+
+        //back Button
+        binding.btnBackReg.setOnClickListener(){
+            val intent = Intent(this, welcome_signUp_login::class.java)
+            startActivity(intent)
+            finish()
+        }
+
+        //regi to login button
+        binding.regToLoginBtn.setOnClickListener(){
+            val intent = Intent(this, LoginActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+
+        binding.regGoogleBtn.setOnClickListener(){
+            Toast.makeText(this, "Tmp not available", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+
+    // dialog box
+
+    private fun customDialog() {
+        val dialog = Dialog(this)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setCancelable(false)
+        dialog.setContentView(R.layout.layout_animation)
+//        dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
+
+
+        var tvTotalAmount = dialog.findViewById<TextView>(R.id.total_amountDialog)
+        var tvPerHomeAmount = dialog.findViewById<TextView>(R.id.per_home_amountDialog)
+        var btnNextToDialog = dialog.findViewById<TextView>(R.id.after_btn_amountDialog)
+
+        tvTotalAmount.text = "Total Amount : $totalAmount"
+        tvPerHomeAmount.text = "Per Home Amount : $perHomePrice"
+        btnNextToDialog.setOnClickListener {
+            dialog.dismiss()
+        }
+        dialog.show()
+
     }
 
     // Function to validate input fields
@@ -180,4 +287,6 @@ class SignupActivity : AppCompatActivity() {
                 }
             }
     }
+
+
 }

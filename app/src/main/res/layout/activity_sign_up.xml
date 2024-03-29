@@ -30,7 +30,7 @@
             tools:ignore="NestedWeights">
 
         <ImageButton
-            android:id="@+id/btn_back"
+            android:id="@+id/btn_back_reg"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:padding="@dimen/_4sdp"
@@ -104,7 +104,10 @@
             android:hint="Enter Your Password"
             android:inputType="textPassword"
             android:padding="@dimen/_10sdp"
+            android:longClickable="false"
+            android:drawableRight="@drawable/baseline_remove_red_eye_24"
             tools:ignore="HardcodedText" />
+
 
         <EditText
             android:id="@+id/editTextConformPassword"
@@ -117,6 +120,8 @@
             android:layout_marginTop="@dimen/_8sdp"
             android:layout_marginEnd="@dimen/_15sdp"
             android:inputType="textPassword"
+            android:longClickable="false"
+            android:drawableRight="@drawable/baseline_remove_red_eye_24"
             tools:ignore="HardcodedText" />
 
         <Button
@@ -151,20 +156,20 @@
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView2"
             android:layout_width="@dimen/_50sdp"
-            android:layout_height="@dimen/_50sdp"
+            android:layout_height="59dp"
+            android:layout_gravity="center"
             android:layout_margin="@dimen/_19sdp"
             android:layout_marginTop="@dimen/_24sdp"
-            android:layout_gravity="center"
             app:cardCornerRadius="@dimen/_6sdp"
             app:cardElevation="2dp">
 
             <ImageView
-                android:id="@+id/imageView3"
+                android:id="@+id/reg_google_btn"
                 android:layout_width="45dp"
                 android:layout_height="45dp"
                 android:layout_gravity="center"
-                android:src="@drawable/google_black"
                 android:padding="@dimen/_2sdp"
+                android:src="@drawable/google_black"
                 android:textAlignment="center"
                 app:layout_constraintHorizontal_bias="0.333" />
         </androidx.cardview.widget.CardView>
@@ -178,6 +183,7 @@
         android:layout_weight="0.7">
 
         <TextView
+            android:id="@+id/regToLogin_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_14sdp"

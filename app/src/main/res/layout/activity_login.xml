@@ -92,7 +92,20 @@
             android:hint="Enter Your Password"
             android:inputType="textPassword"
             android:padding="@dimen/_10sdp"
+            android:longClickable="false"
+            android:drawableRight="@drawable/baseline_remove_red_eye_24"
             tools:ignore="HardcodedText" />
+
+        <TextView
+            android:id="@+id/btn_txt_forgot"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:text="Forgot Password ?"
+            android:textColor="@color/light_white"
+            android:layout_marginEnd="@dimen/_20sdp"
+            android:textStyle="italic"
+            android:fontFamily="@font/magra_bold"/>
 
 
 
@@ -139,7 +152,7 @@
             app:cardElevation="2dp">
 
             <ImageView
-                android:id="@+id/imageView3"
+                android:id="@+id/login_google_btn"
                 android:layout_width="45dp"
                 android:layout_height="45dp"
                 android:layout_gravity="center"
@@ -158,6 +171,7 @@
         android:layout_weight="0.7">
 
         <TextView
+            android:id="@+id/loginToRegButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_14sdp"

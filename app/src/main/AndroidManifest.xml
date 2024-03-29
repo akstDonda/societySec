@@ -13,6 +13,26 @@
         android:theme="@style/Base.Theme.SecAd"
         tools:targetApi="31">
         <activity
+            android:name=".Building_profile"
+            android:exported="false" />
+        <activity
+            android:name=".MeetingUserSecBothWayActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MoreCategoryActivity"
+            android:exported="false" />
+        <activity
+            android:name=".note.NotesMainActivity"
+            android:exported="true"
+            android:theme="@style/Theme.MaterialComponents.DayNight.DarkActionBar">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="MyLibraryName" />
+        </activity>
+        <activity
+            android:name=".DebitCard"
+            android:exported="false" />
+        <activity
             android:name=".setting.CustomerCare"
             android:exported="false" />
         <activity
@@ -24,8 +44,7 @@
         <activity
             android:name=".model.complainModel"
             android:exported="false"
-            android:label="@string/title_activity_complain_model"
-            android:theme="@style/Base.Theme.SecAd" />
+            android:label="@string/title_activity_complain_model" />
         <activity
             android:name=".meeting.user.UserMeetingConsforanceActivity"
             android:exported="false" />
@@ -54,8 +73,7 @@
         <activity
             android:name=".SuccessActivity"
             android:exported="false"
-            android:label="@string/title_activity_success"
-            android:theme="@style/Theme.SecAd" />
+            android:label="@string/title_activity_success" />
         <activity
             android:name=".simple.ReceivePaymentUser"
             android:exported="false" />
@@ -73,7 +91,8 @@
             android:exported="false" />
         <activity
             android:name=".simple.BuildingForm"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.SecAd" />
         <activity
             android:name=".simple.SignupActivity"
             android:exported="false" />

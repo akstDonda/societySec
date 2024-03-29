@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.google.firebase.auth.FirebaseAuth
+import com.nothing.secad.Building_profile
 import com.nothing.secad.ChangePasswordActivity
 import com.nothing.secad.R
 import com.nothing.secad.databinding.FragmentSettingBinding
@@ -55,6 +56,12 @@ class SettingFragment : Fragment() {
             //TODO:DialogBox
             firebaseAuth.signOut()
             var intent = Intent(requireActivity(), welcome_signUp_login::class.java)
+            startActivity(intent)
+            requireActivity().finish()
+        }
+        //profile
+        binding.profileSoc.setOnClickListener(){
+            var intent = Intent(context, Building_profile::class.java)
             startActivity(intent)
             requireActivity().finish()
         }

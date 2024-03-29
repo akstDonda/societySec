@@ -61,6 +61,7 @@
             </LinearLayout>
 
             <TextView
+                android:id="@+id/current_amount_text_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="₹100.00"
@@ -75,33 +76,34 @@
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
                 android:gravity="center_horizontal">
+<!--                <LinearLayout-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_margin="@dimen/_5sdp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:orientation="vertical">-->
+
+<!--                    <androidx.cardview.widget.CardView-->
+<!--                        android:layout_width="@dimen/_30sdp"-->
+<!--                        android:layout_height="@dimen/_30sdp"-->
+<!--                        app:cardCornerRadius="50dp">-->
+
+<!--                        <ImageButton-->
+<!--                            android:id="@+id/payButton"-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:src="@drawable/pay_icon" />-->
+<!--                    </androidx.cardview.widget.CardView>-->
+<!--                    <TextView-->
+<!--                        android:layout_width="@dimen/_30sdp"-->
+<!--                        android:layout_height="match_parent"-->
+<!--                        android:text="Pay"-->
+<!--                        android:textColor="@color/white"-->
+<!--                        android:gravity="center_horizontal"/>-->
+<!--                </LinearLayout>-->
+
+
                 <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_margin="@dimen/_5sdp"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <androidx.cardview.widget.CardView
-                        android:layout_width="@dimen/_30sdp"
-                        android:layout_height="@dimen/_30sdp"
-                        app:cardCornerRadius="50dp">
-
-                        <ImageButton
-                            android:id="@+id/payButton"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/pay_icon" />
-                    </androidx.cardview.widget.CardView>
-                    <TextView
-                        android:layout_width="@dimen/_30sdp"
-                        android:layout_height="match_parent"
-                        android:text="Pay"
-                        android:textColor="@color/white"
-                        android:gravity="center_horizontal"/>
-                </LinearLayout>
-
-
-                <LinearLayout
+                    android:id="@+id/history_admin_transaction"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/_5sdp"
@@ -171,7 +173,7 @@
         </LinearLayout>
 
         <EditText
-            android:id="@+id/editTextTextAmount"
+            android:id="@+id/editTextTAddWalletMoney"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_20sdp"
@@ -182,7 +184,8 @@
             android:hint="Enter Amount"
             android:inputType="number"
             android:padding="@dimen/_12sdp"
-            tools:ignore="HardcodedText"/>
+            tools:ignore="HardcodedText" />
+
         <TextView
             android:id="@+id/textView2"
             android:layout_width="wrap_content"
@@ -203,7 +206,7 @@
             android:layout_marginTop="@dimen/_18sdp"
             android:layout_gravity="center">
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btn1"
+                android:id="@+id/add100BtnWallet"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/border"
@@ -214,7 +217,7 @@
                 tools:ignore="HardcodedText" />
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btn2"
+                android:id="@+id/add200BtnWallet"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_5sdp"
@@ -226,7 +229,7 @@
                 tools:ignore="HardcodedText" />
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btn3"
+                android:id="@+id/add500BtnWallet"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_5sdp"
@@ -239,7 +242,7 @@
 
         </LinearLayout>
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_payment_proceed"
+            android:id="@+id/addBtnWallet"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/_20sdp"
