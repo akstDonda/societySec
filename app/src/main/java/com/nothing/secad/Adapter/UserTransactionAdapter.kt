@@ -1,5 +1,6 @@
 package com.nothing.secad.Adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,7 +12,9 @@ import com.nothing.secad.model.userTransaction
 import java.text.SimpleDateFormat
 import java.util.*
 
-class UserTransactionAdapter(private val transactions: List<userTransaction>) : RecyclerView.Adapter<UserTransactionAdapter.UserTransactionViewHolder>() {
+class UserTransactionAdapter(private var transactions: MutableList<userTransaction>) : RecyclerView.Adapter<UserTransactionAdapter.UserTransactionViewHolder>() {
+
+    var transactionsMaster = transactions.toMutableList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserTransactionViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.single_item_user_transaction_show, parent, false)
@@ -40,5 +43,21 @@ class UserTransactionAdapter(private val transactions: List<userTransaction>) : 
         val transactionStatus: TextView = itemView.findViewById(R.id.transaction_status)
         val homeNo: TextView = itemView.findViewById(R.id.home_no)
         val fastPayButton: Button = itemView.findViewById(R.id.transaction_to_pay_btn)
+    }
+
+    fun updateTransactions(newTransactions: MutableList<userTransaction>) {
+        this.transactions = newTransactions
+        this.transactionsMaster = newTransactions
+        notifyDataSetChanged()
+    }
+
+    fun showOnlyUnpaidTransactions(onlyUnpaid : Boolean) {
+        Log.d("UserTransactionAdapter", "showOnlyUnpaidTransactions: $transactions all $transactionsMaster")
+        if (onlyUnpaid) {
+            transactions = transactions.filter { !it.status }.toMutableList()
+        } else {
+            transactions = transactionsMaster
+        }
+        notifyDataSetChanged()
     }
 }

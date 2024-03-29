@@ -1,9 +1,14 @@
 package com.nothing.secad
 
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.Firebase
+import com.google.firebase.Timestamp
+import com.google.firebase.auth.auth
+import com.google.firebase.firestore.firestore
 import com.nothing.secad.Adapter.UserTransactionAdapter
 import com.nothing.secad.databinding.ActivityUserTransactionShowBinding
 import com.nothing.secad.model.userTransaction
@@ -23,14 +28,45 @@ class UserTransactionShowActivity : AppCompatActivity() {
         recyclerView.layoutManager = LinearLayoutManager(this)
 
         val dummyData = generateDummyData()
-        adapter = UserTransactionAdapter(dummyData)
+        adapter = UserTransactionAdapter(dummyData.toMutableList())
         recyclerView.adapter = adapter
+
+        val firestore = Firebase.firestore
+        val userId = Firebase.auth.currentUser?.uid
+
+        var transactions: MutableList<userTransaction> = mutableListOf()
+
+
+
+        firestore.collection("member").whereEqualTo("societyId", userId).get()
+            .addOnCompleteListener { result ->
+                for (document in result.result) {
+                    val memberId = document.id
+                    firestore.collection("member").document(memberId).collection("transactions").get()
+                        .addOnCompleteListener { result2 ->
+                            for (document2 in result2.result) {
+                                val data = document2.data
+                                transactions.add(
+                                    userTransaction(
+                                        (data["date"] as Timestamp).toDate(),
+                                        (data["amount"] as Long).toInt(),
+                                        data["completed"] as Boolean,
+                                        document.data["userHouseNo"] as String,
+                                        document2.id
+                                    )
+                                )
+
+                                Log.d("UserTransactionShowActivity", "Transaction: $transactions")
+                            }
+                            adapter.updateTransactions(transactions)
+//                            TODO: run this function on toggle:: true -> ONly unpaid, false all
+                            adapter.showOnlyUnpaidTransactions(false)
+                        }
+                }}
     }
 
     private fun generateDummyData(): List<userTransaction> {
         val dummyList = ArrayList<userTransaction>()
-        dummyList.add(userTransaction(Date(), 1000, true, "5050"))
-        dummyList.add(userTransaction(Date(), 2000, false, "2020"))
         // Add more dummy data if needed
         return dummyList
     }

@@ -11,8 +11,10 @@ import com.nothing.secad.model.TransactionHistoryModel
 import java.text.SimpleDateFormat
 import java.util.*
 
-class TransactionHistoryAdapter(private val transactionList: List<TransactionHistoryModel>) :
+class TransactionHistoryAdapter(private var transactionList: MutableList<TransactionHistoryModel>) :
     RecyclerView.Adapter<TransactionHistoryAdapter.ViewHolder>() {
+
+        var transactionListMaster = transactionList
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
@@ -45,5 +47,11 @@ class TransactionHistoryAdapter(private val transactionList: List<TransactionHis
                 // Handle button click here
             }
         }
+    }
+
+    fun updateTransactionList(updatedList: MutableList<TransactionHistoryModel>) {
+        transactionList = updatedList
+        transactionListMaster = updatedList
+        notifyDataSetChanged()
     }
 }

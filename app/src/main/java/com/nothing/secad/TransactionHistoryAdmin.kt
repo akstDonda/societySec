@@ -2,8 +2,13 @@ package com.nothing.secad
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.Firebase
+import com.google.firebase.Timestamp
+import com.google.firebase.auth.auth
+import com.google.firebase.firestore.firestore
 import com.nothing.secad.Adapter.TransactionHistoryAdapter
 import com.nothing.secad.databinding.ActivityTransactionHistoryAdminBinding
 import com.nothing.secad.model.TransactionHistoryModel
@@ -13,7 +18,7 @@ class TransactionHistoryAdmin : AppCompatActivity() {
 
     private lateinit var binding: ActivityTransactionHistoryAdminBinding
     private lateinit var recyclerView: RecyclerView
-    private lateinit var transactionArrayList: ArrayList<TransactionHistoryModel>
+    private lateinit var transactionArrayList: MutableList<TransactionHistoryModel>
     private lateinit var myAdapter: TransactionHistoryAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,7 +28,7 @@ class TransactionHistoryAdmin : AppCompatActivity() {
 
         recyclerView = binding.transactionHistoryRv
         recyclerView.layoutManager = LinearLayoutManager(this)
-        transactionArrayList = ArrayList()
+        transactionArrayList = mutableListOf()
         myAdapter = TransactionHistoryAdapter(transactionArrayList)
         recyclerView.adapter = myAdapter
 
@@ -32,21 +37,26 @@ class TransactionHistoryAdmin : AppCompatActivity() {
     }
 
     private fun addDefaultData() {
-        // Create dummy TransactionHistoryModel objects and add them to the list
-        val date1 = Date()
-        val transaction1 = TransactionHistoryModel(date1, 1000, true, "1")
-        transactionArrayList.add(transaction1)
+        Log.d("TransactionHistory", "addDefaultData: Adding default data")
 
-        val date2 = Date()
-        val transaction2 = TransactionHistoryModel(date2, 2000, false, "2")
-        transactionArrayList.add(transaction2)
+        Firebase.firestore.collection("societies").document(Firebase.auth.currentUser?.uid!!).collection(
+            "transactions"
+        ).get() .addOnCompleteListener { result ->
+            for (document in result.result) {
+                val transactionId = document.id
+                val data = document.data
 
-        val date3 = Date()
-        val transaction3 = TransactionHistoryModel(date3, 1500, true, "3")
-        transactionArrayList.add(transaction3)
+                transactionArrayList.add(
+                    TransactionHistoryModel(
+                        (data["date"] as Timestamp).toDate(),
+                        (data["amount"] as Long).toInt(),
+                        data["completed"] as Boolean,
+                        transactionId
+                ))
+            }
 
-        // Notify the adapter that the data set has changed
-        myAdapter.notifyDataSetChanged()
+        }
+        myAdapter.updateTransactionList(transactionArrayList)
     }
 }
 

@@ -15,14 +15,14 @@
         app:cardCornerRadius="@dimen/_5sdp"
         android:layout_marginVertical="@dimen/_10sdp">
 
-            <SearchView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:queryHint="Search Transaction Here"
-                android:layout_marginBottom="10dp"
-                android:iconifiedByDefault="false"
+        <SearchView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:queryHint="Search Transaction Here"
+            android:layout_marginBottom="10dp"
+            android:iconifiedByDefault="false"
 
-                />
+            />
     </androidx.cardview.widget.CardView>
 
     <androidx.recyclerview.widget.RecyclerView
