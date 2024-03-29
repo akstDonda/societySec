@@ -108,6 +108,7 @@
                         android:layout_height="@dimen/_30sdp"
                         app:cardCornerRadius="50dp">
                         <ImageButton
+                            android:id="@+id/user_transaction_show_btn"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:src="@drawable/history_icon"/>

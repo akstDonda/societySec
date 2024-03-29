@@ -1,6 +1,7 @@
 package com.nothing.secad.simple
 
 import android.content.ContentValues.TAG
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -8,8 +9,10 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.nothing.secad.R
+import com.nothing.secad.UserTransactionShowActivity
 import com.nothing.secad.databinding.ActivityReceivePaymentUserBinding
 import com.nothing.secad.dbHandler.Transaction
+import com.nothing.secad.model.userTransaction
 
 class ReceivePaymentUser : AppCompatActivity() {
 
@@ -21,7 +24,11 @@ class ReceivePaymentUser : AppCompatActivity() {
 
 
 
+        binding.userTransactionShowBtn.setOnClickListener(){
+            var intent = Intent(this, UserTransactionShowActivity::class.java)
+            startActivity(intent)
 
+        }
 
 
         binding.maintenanceSendNotificationBtn.setOnClickListener(){
