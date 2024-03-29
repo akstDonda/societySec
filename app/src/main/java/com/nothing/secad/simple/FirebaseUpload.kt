@@ -37,6 +37,7 @@ class FirebaseUpload : AppCompatActivity() {
         val societyName = intent.getStringExtra("societyName")
         val emailAddress = intent.getStringExtra("emailAddress")
         val password = intent.getStringExtra("password")
+        val address= intent.getStringExtra("address")
 
         var elevators = 0;
         if (selectedElevator != null){
@@ -47,6 +48,7 @@ class FirebaseUpload : AppCompatActivity() {
                     name = societyName!!,
                     email = emailAddress!!,
                     password =password!!,
+                    address = address!!,
                     uid = auth.currentUser!!.uid ,
 //
 //             // TODO: take building

@@ -8,6 +8,7 @@ data class Society(
     var name: String,
     var email: String,
     var password: String,
+    var address: String,
     var uid: String,
     @field:JvmField
     var isBuilding: Boolean,

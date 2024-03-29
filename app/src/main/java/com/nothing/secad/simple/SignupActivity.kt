@@ -58,6 +58,7 @@ class SignupActivity : AppCompatActivity() {
         var name: String;
         var email: String;
         var password: String;
+        var address: String;
 
 
         // TODO: add data to intent
@@ -84,11 +85,13 @@ class SignupActivity : AppCompatActivity() {
             name = binding.editTextTextSocietyName.text.toString()
             email = binding.editTextTextEmailAddress.text.toString()
             password =binding.editTextPassword.text.toString()
+            address = binding.editTextSocAddress.text.toString()
 
 
             intentNew.putExtra("societyName", name)
             intentNew.putExtra("emailAddress", email)
             intentNew.putExtra("password", password)
+            intentNew.putExtra("address", address)
             clearErrors() // Clear previous errors
 
 
@@ -188,9 +191,7 @@ class SignupActivity : AppCompatActivity() {
             finish()
         }
 
-        binding.regGoogleBtn.setOnClickListener(){
-            Toast.makeText(this, "Tmp not available", Toast.LENGTH_SHORT).show()
-        }
+
     }
 
 
@@ -225,6 +226,7 @@ class SignupActivity : AppCompatActivity() {
         val email = binding.editTextTextEmailAddress.text.toString().trim()
         val password = binding.editTextPassword.text.toString().trim()
         val confirmPassword = binding.editTextConformPassword.text.toString().trim()
+        val address = binding.editTextSocAddress.text.toString().trim()
 
         // Add your validation logic here
         if (userName.isEmpty()) {
@@ -242,6 +244,11 @@ class SignupActivity : AppCompatActivity() {
             isValid = false
         }
 
+        if (address.isEmpty() || address.length <  20) {
+            binding.editTextSocAddress.setError("Address is required or more than 20 char")
+            isValid = false
+        }
+
         if (confirmPassword.isEmpty()) {
             binding.editTextConformPassword.setError("Confirm Password is required")
             isValid = false
@@ -251,6 +258,7 @@ class SignupActivity : AppCompatActivity() {
             binding.editTextConformPassword.setError("Passwords do not match")
             isValid = false
         }
+
 
         return isValid
     }
