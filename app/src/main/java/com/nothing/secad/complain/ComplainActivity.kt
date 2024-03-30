@@ -5,6 +5,7 @@ import android.content.ContentValues.TAG
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.Firebase
 import com.google.firebase.Timestamp
@@ -18,6 +19,7 @@ import java.util.*
 
 class ComplainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityComplainBinding
+    lateinit var complainAdapter: ComplainAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityComplainBinding.inflate(layoutInflater)
@@ -30,12 +32,39 @@ class ComplainActivity : AppCompatActivity() {
         // Set up RecyclerView
         val layoutManager = LinearLayoutManager(this)
         binding.complainRv.layoutManager = layoutManager
-        val adapter = ComplainAdapter(dummyData, this)
+        val adapter = ComplainAdapter(dummyData.toMutableList(), this)
+//        complainAdapter = ComplainAdapter(dummyData.toMutableList(), this)
+
         binding.complainRv.adapter = adapter
+
+
+
+        // Inside onCreate method
+        complainAdapter = adapter // Assign the adapter to complainAdapter
+        binding.complainRv.adapter = complainAdapter // Set the adapter to RecyclerView
+        var searchView= binding.complainSearchView
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                Log.d("Search", newText.toString())
+                complainAdapter.updateQuery(newText.orEmpty()) // Call updateQuery method
+                return true
+            }
+        })
+
+
+
 
         fun updateView() {
             adapter.addData(dummyData)
         }
+
+
+
+
 
         Firebase.firestore.collection("societies").document(Firebase.auth.currentUser!!.uid).collection("complains").get()
             .addOnSuccessListener { result ->

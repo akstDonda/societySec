@@ -60,7 +60,16 @@ class UserTransactionShowActivity : AppCompatActivity() {
                             }
                             adapter.updateTransactions(transactions)
 //                            TODO: run this function on toggle:: true -> ONly unpaid, false all
-                            adapter.showOnlyUnpaidTransactions(false)
+
+                            binding.checkBox.setOnCheckedChangeListener { buttonView, isChecked ->
+                                if (isChecked) {
+                                    adapter.showOnlyUnpaidTransactions(true) // Show only unpaid transactions
+                                } else {
+                                    adapter.showOnlyUnpaidTransactions(false) // Show all transactions
+                                }
+                            }
+
+
                         }
                 }}
     }

@@ -1,6 +1,7 @@
 package com.nothing.secad.Adapter
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,8 +18,10 @@ import com.nothing.secad.model.complainModel
 import java.text.SimpleDateFormat
 import java.util.*
 
-class ComplainAdapter(private var complainList: List<complainModel>, var context: Context) :
+class ComplainAdapter(private var complainList: MutableList<complainModel>, var context: Context) :
     RecyclerView.Adapter<ComplainAdapter.ComplainViewHolder>() {
+
+    var complainMaster = complainList
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ComplainViewHolder {
         val itemView = LayoutInflater.from(parent.context)
@@ -87,9 +90,29 @@ class ComplainAdapter(private var complainList: List<complainModel>, var context
     }
 
     fun addData(dummyData : List<complainModel>) {
-        complainList = dummyData
+
+
+        this.complainList = dummyData.toMutableList()
+        this.complainMaster = dummyData.toMutableList()
+
         notifyDataSetChanged()
     }
+
+    fun updateQuery(query: String) {
+
+
+
+        complainList = if (query.isNotBlank()) {
+            complainMaster.filter { complain ->
+                complain.title.contains(query, ignoreCase = true)||complain.type.contains(query, ignoreCase = true)||complain.status.contains(query,ignoreCase = true) || complain.description.contains(query,ignoreCase = true)|| SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(complain.date).contains(query, ignoreCase = true)
+            }.toMutableList()
+        } else {
+            complainMaster.toMutableList()
+        }
+        notifyDataSetChanged()
+    }
+
+
 }
 
 
@@ -109,3 +132,4 @@ fun updateComplain(complainId: String, approved: Boolean) {
             .update("rejected", true)
     }
 }
+
