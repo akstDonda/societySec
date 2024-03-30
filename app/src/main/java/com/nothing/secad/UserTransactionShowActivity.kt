@@ -3,6 +3,7 @@ package com.nothing.secad
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.Firebase
@@ -36,6 +37,19 @@ class UserTransactionShowActivity : AppCompatActivity() {
 
         var transactions: MutableList<userTransaction> = mutableListOf()
 
+
+        var searchView= binding.transactionFetchToUserSearchView
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                Log.d("Search", newText.toString())
+                adapter.updateQuery(newText.orEmpty()) // Call updateQuery method
+                return true
+            }
+        })
 
 
         firestore.collection("member").whereEqualTo("societyId", userId).get()

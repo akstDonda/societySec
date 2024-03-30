@@ -50,6 +50,20 @@ class UserTransactionAdapter(private var transactions: MutableList<userTransacti
         this.transactionsMaster = newTransactions
         notifyDataSetChanged()
     }
+    fun updateQuery(query: String) {
+        transactions = if (query.isNotBlank()) {
+            transactionsMaster.filter { transaction ->
+                transaction.amount.toString().contains(query, ignoreCase = true) ||
+                        transaction.homeNo.toString().contains(query, ignoreCase = true) ||
+                        transaction.status.toString().contains(query, ignoreCase = true)||
+                        SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(transaction.date).contains(query, ignoreCase = true)
+
+            }.toMutableList()
+        } else {
+            transactionsMaster.toMutableList()
+        }
+        notifyDataSetChanged()
+    }
 
     fun showOnlyUnpaidTransactions(onlyUnpaid : Boolean) {
         Log.d("UserTransactionAdapter", "showOnlyUnpaidTransactions: $transactions all $transactionsMaster")
@@ -60,4 +74,8 @@ class UserTransactionAdapter(private var transactions: MutableList<userTransacti
         }
         notifyDataSetChanged()
     }
+
+
+
+
 }
