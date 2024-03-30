@@ -61,6 +61,7 @@ class UserTransactionAdapter(private var transactions: MutableList<userTransacti
             }.toMutableList()
         } else {
             transactionsMaster.toMutableList()
+            //ok
         }
         notifyDataSetChanged()
     }
