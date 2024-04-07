@@ -3,6 +3,7 @@ package com.nothing.secad
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.Firebase
@@ -31,6 +32,20 @@ class TransactionHistoryAdmin : AppCompatActivity() {
         transactionArrayList = mutableListOf()
         myAdapter = TransactionHistoryAdapter(transactionArrayList)
         recyclerView.adapter = myAdapter
+
+
+        var searchView= binding.transactionSearchViewAdmin
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                Log.d("Search", newText.toString())
+                myAdapter.updateQuery(newText.orEmpty()) // Call updateQuery method
+                return true
+            }
+        })
 
         // Call function to add default hardcoded data
         addDefaultData()

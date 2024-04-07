@@ -37,7 +37,6 @@
             android:layout_height="wrap_content"
             android:hint="Meeting Id"
             android:layout_marginTop="20dp"
-            android:backgroundTint="@color/material_dynamic_primary80"
             style="@style/Widget.Material3.TextInputLayout.OutlinedBox">
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
@@ -53,7 +52,6 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:hint="Your Name"
-            android:backgroundTint="@color/material_dynamic_primary80"
             style="@style/Widget.Material3.TextInputLayout.OutlinedBox">
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"

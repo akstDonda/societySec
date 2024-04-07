@@ -13,6 +13,13 @@
         android:theme="@style/Base.Theme.SecAd"
         tools:targetApi="31">
         <activity
+            android:name=".EventActivity"
+            android:exported="false"
+            android:label="@string/title_activity_event"
+            android:theme="@style/Base.Theme.SecAd" >
+
+        </activity>
+        <activity
             android:name=".UserTransactionShowActivity"
             android:exported="false" />
         <activity
@@ -110,6 +117,7 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
         <activity
             android:name=".meeting.ZoomMainActivity"

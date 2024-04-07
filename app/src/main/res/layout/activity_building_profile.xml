@@ -7,8 +7,10 @@
     android:layout_gravity="center_vertical"
     android:orientation="vertical"
     android:backgroundTint="@color/white"
+    android:id="@+id/updateUserProfileRoot"
     tools:context=".Building_profile">
     <ScrollView
+        android:id="@+id/updateUserProfileScroll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical">
@@ -22,18 +24,20 @@
                 android:gravity="center_horizontal"
                 android:layout_marginTop="@dimen/_20sdp">
 
+
                 <androidx.cardview.widget.CardView
+                    android:layout_marginTop="@dimen/_20sdp"
                     android:layout_width="@dimen/_120sdp"
                     android:layout_height="@dimen/_120sdp"
                     android:backgroundTint="@color/primary_color"
-                    app:cardCornerRadius="@dimen/_60sdp">
+                    app:cardCornerRadius="@dimen/_100sdp">
 
                     <ImageButton
                         android:id="@+id/image_user_show"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
                         android:contentDescription="user image"
-                        android:scaleType="fitCenter"
+                        android:scaleType="centerCrop"
                         tools:ignore="HardcodedText"
                         android:src="@drawable/placeholder_image_failed"/>
                 </androidx.cardview.widget.CardView>
@@ -132,6 +136,15 @@
 
 
     </ScrollView>
+    <com.github.ybq.android.spinkit.SpinKitView
+        android:id="@+id/spin_kit"
+        style="@style/SpinKitView.Large.Circle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        app:SpinKit_Color="@color/primary_color"
+        app:SpinKit_Style="FadingCircle" />
 
 
 

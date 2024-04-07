@@ -54,4 +54,15 @@ class TransactionHistoryAdapter(private var transactionList: MutableList<Transac
         transactionListMaster = updatedList
         notifyDataSetChanged()
     }
+
+    fun updateQuery(query: String) {
+        transactionList = if (query.isNotBlank()) {
+            transactionListMaster.filter { transaction ->
+                transaction.amount.toString().contains(query,ignoreCase = true)|| transaction.status.toString().contains(query, ignoreCase = true)|| SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(transaction.date).contains(query, ignoreCase = true)
+            }.toMutableList()
+        } else {
+            transactionListMaster.toMutableList()
+        }
+        notifyDataSetChanged()
+    }
 }

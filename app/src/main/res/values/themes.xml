@@ -5,11 +5,12 @@
         <item name="colorPrimary">@color/primary_color</item>
         <item name="colorPrimaryDark">@color/primary_color</item>
         <item name="colorAccent">@color/primary_color</item>
-        <item name="android:statusBarColor">@color/primary_color</item> <!-- Set status bar color -->
+        <item name="android:statusBarColor">@color/primary_color
+        </item> <!-- Set status bar color -->
     </style>
 
-    <style name="Theme.SecAd" parent="Base.Theme.SecAd" >
-<!--        <item name="android:statusBarColor">@color/primary_color</item> &lt;!&ndash; Override status bar color if needed &ndash;&gt;-->
+    <style name="Theme.SecAd" parent="Base.Theme.SecAd">
+        <!--        <item name="android:statusBarColor">@color/primary_color</item> &lt;!&ndash; Override status bar color if needed &ndash;&gt;-->
     </style>
 
     <style name="Theme.App" parent="Theme.Material3.DayNight">
@@ -38,6 +39,7 @@
     </style>
 
     //notes
+
     <style name="Base.Theme.SocietyUser_notes" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <item name="colorPrimary">@color/pink</item>
         <item name="colorPrimaryVariant">@color/pink</item>
