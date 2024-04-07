@@ -53,6 +53,8 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation project(':mobilertc')
     implementation project(':commonlib')
+
+
     implementation 'androidx.navigation:navigation-fragment-ktx:2.7.7'
     implementation 'androidx.navigation:navigation-ui-ktx:2.7.7'
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.7.0'
@@ -76,6 +78,7 @@ dependencies {
     implementation 'com.github.dangiashish:Auto-Image-Slider:1.0.4'
     implementation 'com.github.ZEGOCLOUD:zego_uikit_prebuilt_video_conference_android:2.3.1'
 
+
     ///Notes
     // ROOM
     def roomVersion = "2.6.1"
@@ -96,4 +99,6 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleVersion"
 // Annotation processor
     ksp "androidx.lifecycle:lifecycle-compiler:$lifecycleVersion"
+
+
 }
