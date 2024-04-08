@@ -38,10 +38,10 @@ public class ZoomMainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String name1 = name.getText().toString().trim();
-                String meeting1 = meetingId.getText().toString().trim();
-                String password1 = password.getText().toString().trim();
+                String meeting1 = "4331480358";
+                String password1 = "123";
 
-                if (name1.length()>0 && meeting1.length()>0 && password1.length()>0 ){
+                if (name1.length()>0){
 
                     startMeeting(name1,meeting1,password1, ZoomMainActivity.this);
 
