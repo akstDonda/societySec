@@ -38,13 +38,14 @@
             android:hint="Meeting Id"
             android:layout_marginTop="20dp"
             style="@style/Widget.Material3.TextInputLayout.OutlinedBox">
+
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/meeting_id_input"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="number"
                 android:maxLength="10"
-                android:textSize="18sp"
-                android:id="@+id/meeting_id_input"/>
+                android:textSize="18sp" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout

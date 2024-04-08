@@ -66,7 +66,7 @@ class LoginActivity : AppCompatActivity() {
                             Log.d(TAG, "signInWithEmail:success")
                             val user = auth.currentUser
 
-                            var intent = Intent(this@LoginActivity,HomeActivity::class.java)
+                            var intent = Intent(this@LoginActivity,animation_after_login::class.java)
                             startActivity(intent)
                             finish()
                         } else {

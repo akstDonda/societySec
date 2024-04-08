@@ -1,5 +1,6 @@
 package com.nothing.secad
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -49,6 +50,8 @@ class DebitCard : AppCompatActivity() {
                         memberDocRef.update("currentAmount", newAmount)
                             .addOnSuccessListener {
                                 Toast.makeText(this, "Amount Added", Toast.LENGTH_SHORT).show()
+                                var intent = Intent(this, addWallet_animation::class.java)
+                                startActivity(intent)
                                 finish() // Close the activity if the update is successful
                             }
                             .addOnFailureListener { e ->

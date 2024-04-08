@@ -19,6 +19,7 @@ class HomeActivity : AppCompatActivity() {
         window.statusBarColor = ContextCompat.getColor(this, R.color.white)
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        window.statusBarColor = ContextCompat.getColor(this, R.color.primary_color)
 
         val navView: BottomNavigationView = binding.navView
 

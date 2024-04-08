@@ -12,15 +12,25 @@ import com.google.firebase.auth.auth
 import com.google.firebase.firestore.firestore
 import com.nothing.secad.R
 import com.nothing.secad.Transaction
+import com.nothing.secad.databinding.ActivityPayToAdminBinding
 import java.time.LocalDateTime
 import java.util.Date
 
 class PayToAdmin : AppCompatActivity() {
+
+    private lateinit var binding: ActivityPayToAdminBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_pay_to_admin)
+        binding = ActivityPayToAdminBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        val transactionId = intent.getStringExtra("transactionId")
+        val transactionAmount = intent.getIntExtra("transactionAmount", 0)
+        val transactionAmountDouble: Double = transactionAmount.toDouble()
+        binding.edtPayToAdmin.setText(transactionAmount.toString())
 
-        createTransaction(100, Intent(this, SendPaymentAdmin::class.java), Intent(this, SendPaymentAdmin::class.java))
+        binding.btnPayToLl.setOnClickListener(){
+            createTransaction(transactionAmount, Intent(this, SendPaymentAdmin::class.java), Intent(this, SendPaymentAdmin::class.java))
+        }
     }
 
     fun createTransaction(amount: Int, successIntent: Intent, failureIntent: Intent) {

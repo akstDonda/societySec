@@ -52,6 +52,14 @@ class DashbordFragment : Fragment() {
             var intent = Intent(context, ComplainActivity::class.java)
             startActivity(intent)
         }
+        binding!!.notification.setOnClickListener(){
+            Toast.makeText(requireContext(), "tmp not available", Toast.LENGTH_SHORT).show()
+        }
+
+        binding!!.moreCategoryTxt.setOnClickListener(){
+            var intent = Intent(context, MoreCategoryActivity::class.java)
+            startActivity(intent)
+        }
 
         return binding?.root
 
@@ -69,12 +77,11 @@ class DashbordFragment : Fragment() {
 
         // Dummy data for categories
         val categoryList = listOf(
-            CategoryModel(R.drawable.plain_dollar, "payment"),
+            CategoryModel(R.drawable.pay_vector, "payment"),
             CategoryModel(R.drawable.baseline_add_complain_24, "complain"),
             CategoryModel(R.drawable.baseline_meeting_24, "meeting"),
             CategoryModel(R.drawable.baseline_event_note_24, "Notes"),
-            CategoryModel(R.drawable.baseline_chat_24, "Chat"),
-            CategoryModel(R.drawable.baseline_chat_24, "Event"),
+            CategoryModel(R.drawable.event, "Event"),
             CategoryModel(us.zoom.videomeetings.R.drawable.ic_more, "more")
         )
 
@@ -101,14 +108,12 @@ class DashbordFragment : Fragment() {
                         intentFun(NotesMainActivity::class.java)
                     }
                     4 -> {
-                        Toast.makeText(context, "available up to 20march", Toast.LENGTH_SHORT).show()
-                    }
-                    5 -> {
                         intentFun(EventActivity::class.java)
                     }
-                    6->{
+                    5 -> {
                         intentFun(MoreCategoryActivity::class.java)
                     }
+
                     else -> {
                         Toast.makeText(context,"rmp not available",Toast.LENGTH_SHORT).show()
                     }

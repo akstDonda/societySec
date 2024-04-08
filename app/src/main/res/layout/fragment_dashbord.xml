@@ -51,6 +51,7 @@
 
             </LinearLayout>
             <ImageView
+                android:id="@+id/notification"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_notifications_black_24dp"
@@ -280,16 +281,18 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/tree1"/>
+
                 <TextView
+                    android:id="@+id/more_category_txt"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="Category"
-                    android:gravity="center_vertical"
-                    android:textSize="@dimen/_20sdp"
-                    android:fontFamily="@font/zm_fake_session_title_font"
                     android:layout_margin="@dimen/_10sdp"
-                    android:textStyle="bold"
-                    />
+                    android:fontFamily="@font/zm_fake_session_title_font"
+                    android:gravity="center_vertical"
+                    android:text="Category"
+                    android:textSize="@dimen/_20sdp"
+                    android:textStyle="bold" />
+
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

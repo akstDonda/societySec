@@ -13,12 +13,19 @@
         android:theme="@style/Base.Theme.SecAd"
         tools:targetApi="31">
         <activity
+            android:name=".addWallet_animation"
+            android:exported="false" />
+        <activity
+            android:name=".animation_after_sign_up"
+            android:exported="false" />
+        <activity
+            android:name=".simple.animation_after_login"
+            android:exported="false" />
+        <activity
             android:name=".EventActivity"
             android:exported="false"
             android:label="@string/title_activity_event"
-            android:theme="@style/Base.Theme.SecAd" >
-
-        </activity>
+            android:theme="@style/Base.Theme.SecAd" />
         <activity
             android:name=".UserTransactionShowActivity"
             android:exported="false" />
@@ -105,7 +112,8 @@
             android:theme="@style/Theme.SecAd" />
         <activity
             android:name=".simple.SignupActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".simple.welcome_signUp_login" />
         <activity
             android:name=".simple.welcome_signUp_login"
             android:exported="false" />
@@ -117,7 +125,6 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
         <activity
             android:name=".meeting.ZoomMainActivity"

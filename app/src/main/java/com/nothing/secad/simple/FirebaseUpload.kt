@@ -11,6 +11,7 @@ import com.google.firebase.auth.auth
 import com.google.firebase.firestore.firestore
 import com.nothing.secad.HomeActivity
 import com.nothing.secad.Society
+import com.nothing.secad.animation_after_sign_up
 import com.nothing.secad.databinding.ActivityFirebaseUploadBinding
 
 class FirebaseUpload : AppCompatActivity() {
@@ -75,7 +76,7 @@ class FirebaseUpload : AppCompatActivity() {
 
 
         // TODO: temp next activity
-        val nextIntent = Intent(this, HomeActivity::class.java)
+        val nextIntent = Intent(this, animation_after_sign_up::class.java)
 
         // Init database
         val db = Firebase.firestore;
@@ -86,6 +87,7 @@ class FirebaseUpload : AppCompatActivity() {
             .addOnSuccessListener {
                 Log.d(TAG, "DocumentSnapshot successfully written!")
                 startActivity(nextIntent)
+                finish()
             }
             // Failure
             .addOnFailureListener {
@@ -94,6 +96,7 @@ class FirebaseUpload : AppCompatActivity() {
 
                 val signUpIntent = Intent(this, SignupActivity::class.java)
                 startActivity(signUpIntent)
+
             }
 
     }

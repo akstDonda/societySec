@@ -27,6 +27,7 @@ class splash_MainActivity : AppCompatActivity() {
                     finish()
                 }else{
                     intentFun(welcome_signUp_login::class.java)
+                    finish()
                 }
             }, 1200)
         } else {

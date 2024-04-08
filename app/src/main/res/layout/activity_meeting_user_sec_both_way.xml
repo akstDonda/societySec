@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@drawable/meeting_bg"
     android:orientation="vertical"
     android:weightSum="2"
     tools:context=".MeetingUserSecBothWayActivity">
@@ -17,6 +17,15 @@
         android:src="@drawable/meeting_backgroun_image"
         android:contentDescription="transfer image showcase"
         tools:ignore="HardcodedText"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_30sdp"
+        android:fontFamily="@font/roboto_bold"
+        android:gravity="center_horizontal"
+        android:text="Meeting"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_25ssp"
+        tools:ignore="HardcodedText,TextSizeCheck" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -57,15 +66,7 @@
             tools:ignore="HardcodedText"
             android:text="--------------------------------------------------------------"/>
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_30sdp"
-            android:fontFamily="@font/roboto_bold"
-            android:gravity="center_horizontal"
-            android:text="Meeting"
-            android:textColor="@color/primary_color"
-            android:textSize="@dimen/_25ssp"
-            tools:ignore="HardcodedText,TextSizeCheck" />
+
 
 
     </LinearLayout>

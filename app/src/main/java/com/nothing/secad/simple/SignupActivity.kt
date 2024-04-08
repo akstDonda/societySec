@@ -21,7 +21,7 @@ import com.google.firebase.auth.auth
 import com.nothing.secad.R
 import com.nothing.secad.Society
 import com.nothing.secad.databinding.ActivitySignUpBinding
-import com.zipow.videobox.LoginActivity
+
 
 class SignupActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySignUpBinding
@@ -198,6 +198,7 @@ class SignupActivity : AppCompatActivity() {
     // dialog box
 
     private fun customDialog() {
+        binding.signUpRoot.background = ContextCompat.getDrawable(this, R.color.primary_color)
         val dialog = Dialog(this)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setCancelable(false)
@@ -213,6 +214,7 @@ class SignupActivity : AppCompatActivity() {
         tvPerHomeAmount.text = "Per Home Amount : $perHomePrice"
         btnNextToDialog.setOnClickListener {
             dialog.dismiss()
+            binding.signUpRoot.background = ContextCompat.getDrawable(this, R.color.white)
         }
         dialog.show()
 

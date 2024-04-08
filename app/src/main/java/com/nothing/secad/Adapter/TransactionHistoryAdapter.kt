@@ -1,5 +1,6 @@
 package com.nothing.secad.Adapter
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,6 +9,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.nothing.secad.R
 import com.nothing.secad.model.TransactionHistoryModel
+import com.nothing.secad.simple.PayToAdmin
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -25,6 +27,29 @@ class TransactionHistoryAdapter(private var transactionList: MutableList<Transac
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val transaction = transactionList[position]
         holder.bind(transaction)
+
+
+        if (transaction.status == true){
+            holder.transactionStatus.text = "Status: Complete"
+        }else{
+            holder.transactionStatus.text = "Status: pending"
+        }
+
+        if (transaction.status) { // Assuming transaction.status is a boolean
+            holder.transactionToPayBtn.visibility = View.GONE
+        } else {
+            holder.transactionToPayBtn.visibility = View.VISIBLE
+            holder.transactionToPayBtn.setOnClickListener {
+                val intent = Intent(it.context, PayToAdmin::class.java)
+                intent.putExtra("transactionId", transaction.id)
+                intent.putExtra("transactionDate", transaction.date)
+                intent.putExtra("transactionAmount", transaction.amount)
+                intent.putExtra("transactionStatus", transaction.status)
+                it.context.startActivity(intent)
+            }
+        }
+
+
     }
 
     override fun getItemCount(): Int {
@@ -34,8 +59,9 @@ class TransactionHistoryAdapter(private var transactionList: MutableList<Transac
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val transactionDate: TextView = itemView.findViewById(R.id.transaction_date)
         private val transactionAmount: TextView = itemView.findViewById(R.id.transaction_amount)
-        private val transactionStatus: TextView = itemView.findViewById(R.id.transaction_status)
-        private val transactionToPayBtn: Button = itemView.findViewById(R.id.transaction_to_pay_btn)
+        val transactionStatus: TextView = itemView.findViewById(R.id.transaction_status)
+        val transactionToPayBtn: Button = itemView.findViewById(R.id.transaction_to_pay_btn)
+
 
         fun bind(transaction: TransactionHistoryModel) {
             val dateFormat = SimpleDateFormat("dd/MM/yy", Locale.getDefault())

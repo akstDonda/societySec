@@ -1,60 +1,52 @@
 package com.nothing.secad.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.nothing.secad.databinding.FragmentTransactionBinding // Import the generated binding class
 import com.nothing.secad.R
+import com.nothing.secad.simple.ReceivePaymentUser
+import com.nothing.secad.simple.SendPaymentAdmin
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [TransactionFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class TransactionFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+
+    // Declare a binding variable
+    private var _binding: FragmentTransactionBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_transaction, container, false)
+    ): View {
+        // Inflate the layout using the generated binding class
+        _binding = FragmentTransactionBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment TransactionFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            TransactionFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.recivePaymentToUserBtn.setOnClickListener(){
+            var Intent = Intent(activity, ReceivePaymentUser::class.java)
+            startActivity(Intent)
+
+        }
+
+        binding.sendPaymentToAdminBtn.setOnClickListener(){
+            var Intent = Intent(activity, SendPaymentAdmin::class.java)
+            startActivity(Intent)
+        }
     }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        // Nullify the binding reference to avoid memory leaks
+        _binding = null
+    }
+
+
 }
