@@ -26,7 +26,16 @@ class DebitCard : AppCompatActivity() {
         val btn: Button = findViewById(R.id.add_money_wallet_debitCard)
         btn.setOnClickListener(){
             //TODO:increase
-            updateCurrentAmount(intAddAmount)
+
+
+            if (binding.cardNumberEdittext.text.toString() == "111122223333" ||binding.cvvEdittext.text.toString() == "123" ){
+                updateCurrentAmount(intAddAmount)
+            }else{
+                binding.cardNumberEdittext.error = "Invalid Card Number"
+                binding.cvvEdittext.error = "Invalid CVV"
+                binding.expiryDateEdittext.error = "Invalid Expiry Date"
+            }
+
         }
 
     }

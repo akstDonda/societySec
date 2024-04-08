@@ -74,13 +74,13 @@ class ComplainActivity : AppCompatActivity() {
 
                     var status = "pending"
                     if (data.get("resolved").toString().toBoolean()) {
-                        status = "resolved"
+                        status = "Resolved!"
                     }
-                    else if (data.get("approved").toString().toBoolean()) {
+                    else if (data.get("Approved!").toString().toBoolean()) {
                         status = "approved"
                     }
                     else if (data.get("rejected").toString().toBoolean()) {
-                        status = "rejected"
+                        status = "Rejected!"
                     }
 
                     var date = data.get("timestamp") as Timestamp
