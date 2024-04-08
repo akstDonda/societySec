@@ -95,6 +95,7 @@ class Building_profile : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityBuildingProfileBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        supportActionBar?.title = "Profile"
         UserDataFetch()
         UserDataFetchImage()
 

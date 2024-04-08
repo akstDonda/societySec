@@ -19,6 +19,7 @@ class DebitCard : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityDebitCardBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        supportActionBar?.title = "DebitCard Transaction"
 
         val addAmount = intent.getStringExtra("amount")
         val intAddAmount = addAmount?.toIntOrNull() ?: 0

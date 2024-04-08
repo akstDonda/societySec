@@ -20,6 +20,7 @@ class CustomerCare : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityCustomereCareBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        supportActionBar?.title = "Customer Care"
 
         //email btn
         binding.btnIssueSendEmail.setOnClickListener(){

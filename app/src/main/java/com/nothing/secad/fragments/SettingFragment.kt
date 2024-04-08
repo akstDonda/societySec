@@ -79,7 +79,12 @@ class SettingFragment : Fragment() {
         binding.profileSoc.setOnClickListener(){
             var intent = Intent(context, Building_profile::class.java)
             startActivity(intent)
-            requireActivity().finish()
+
+        }
+        binding.imgButtonEditProfile.setOnClickListener(){
+            var intent = Intent(context, Building_profile::class.java)
+            startActivity(intent)
+
         }
     }
 

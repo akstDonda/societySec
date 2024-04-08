@@ -14,6 +14,7 @@ class information_activity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityInformationBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        supportActionBar?.title = "❕ Information"
 
         binding.meetingInfo.setOnClickListener(){
 

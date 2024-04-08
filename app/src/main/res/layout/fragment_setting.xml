@@ -67,6 +67,7 @@
                         android:textColor="@color/primary_color"
                         android:textSize="@dimen/_20sdp"/>
                     <ImageButton
+                        android:id="@+id/img_button_editProfile"
                         android:layout_width="@dimen/_25sdp"
                         android:layout_height="@dimen/_28sdp"
                         android:background="@android:color/transparent"
