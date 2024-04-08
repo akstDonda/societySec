@@ -5,6 +5,8 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -32,7 +34,30 @@ class ReceivePaymentUser : AppCompatActivity() {
 
 
         binding.maintenanceSendNotificationBtn.setOnClickListener(){
-            sendNotification()
+
+
+            val builder = AlertDialog.Builder(this)
+
+            // Set the dialog properties
+            builder.setTitle("maintenance")
+            builder.setMessage("Send Request For Maintenance, Are You sure!!!")
+
+            // Set the positive button
+            builder.setPositiveButton("Yes") { dialog, which ->
+                // Handle the positive button click
+                sendNotification()
+                Toast.makeText(this, "send successfully", Toast.LENGTH_SHORT).show()
+            }
+
+            // Set the negative button
+            builder.setNegativeButton("No") { dialog, which ->
+                // Handle the negative button click
+                Toast.makeText(this, "Cancel", Toast.LENGTH_SHORT).show()
+            }
+
+            // Create and show the dialog
+            val dialog = builder.create()
+            dialog.show()
 
         }
 

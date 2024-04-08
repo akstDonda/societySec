@@ -8,7 +8,10 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.Firebase
 import com.google.firebase.Timestamp
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.firestore
 import com.nothing.secad.Transaction
 import com.nothing.secad.databinding.ActivityPayToAdminBinding
@@ -17,10 +20,16 @@ import java.util.Date
 class PayToAdmin : AppCompatActivity() {
 
     private lateinit var binding: ActivityPayToAdminBinding
+    private var currentAmount:Long =0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityPayToAdminBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        currentAmountCheck()
+
+
+
         val transactionId = intent.getStringExtra("transactionId")
         val transactionAmount = intent.getIntExtra("transactionAmount", 0)
         val transactionAmountDouble: Double = transactionAmount.toDouble()
@@ -83,5 +92,22 @@ class PayToAdmin : AppCompatActivity() {
                 db.collection("societies").document(Firebase.auth.currentUser?.uid ?: "")
                     .update("currentAmount", balance - amount)
             }
+    }
+
+    fun currentAmountCheck(){
+        val currentUser = FirebaseAuth.getInstance().currentUser
+        val uid = currentUser?.uid
+
+        val db = FirebaseFirestore.getInstance()
+        val userDocRef = db.collection("societies").document(uid!!)
+
+        userDocRef.get().addOnSuccessListener { documentSnapshot ->
+            currentAmount = documentSnapshot.getLong("currentAmount") ?: 0L
+            Toast.makeText(this, currentAmount.toString(), Toast.LENGTH_SHORT).show()
+            // Use the currentAmount value as needed
+            // ...
+        }.addOnFailureListener {
+            // Handle any errors
+        }
     }
 }
