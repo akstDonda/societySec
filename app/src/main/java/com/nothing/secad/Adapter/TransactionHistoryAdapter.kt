@@ -29,7 +29,7 @@ class TransactionHistoryAdapter(private var transactionList: MutableList<Transac
         holder.bind(transaction)
 
 
-        if (transaction.status == true){
+        if (transaction.status){
             holder.transactionStatus.text = "Status: Complete"
         }else{
             holder.transactionStatus.text = "Status: pending"

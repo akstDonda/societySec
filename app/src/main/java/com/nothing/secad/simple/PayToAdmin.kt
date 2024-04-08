@@ -2,18 +2,16 @@ package com.nothing.secad.simple
 
 import android.content.ContentValues
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.Firebase
 import com.google.firebase.Timestamp
 import com.google.firebase.auth.auth
 import com.google.firebase.firestore.firestore
-import com.nothing.secad.R
 import com.nothing.secad.Transaction
 import com.nothing.secad.databinding.ActivityPayToAdminBinding
-import java.time.LocalDateTime
 import java.util.Date
 
 class PayToAdmin : AppCompatActivity() {
@@ -28,33 +26,62 @@ class PayToAdmin : AppCompatActivity() {
         val transactionAmountDouble: Double = transactionAmount.toDouble()
         binding.edtPayToAdmin.setText(transactionAmount.toString())
 
-        binding.btnPayToLl.setOnClickListener(){
-            createTransaction(transactionAmount, Intent(this, SendPaymentAdmin::class.java), Intent(this, SendPaymentAdmin::class.java))
+        binding.btnPayToLl.setOnClickListener {
+            if (transactionId != null) {
+                createTransaction(
+                    transactionAmount,
+                    transactionId,
+                    Intent(this, SendPaymentAdmin::class.java),
+                    Intent(this, SendPaymentAdmin::class.java)
+                )
+            } else {
+                Toast.makeText(this, "Failed to Load Transaction Id", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
-    fun createTransaction(amount: Int, successIntent: Intent, failureIntent: Intent) {
+    fun createTransaction(
+        amount: Int,
+        transactionId: String,
+        successIntent: Intent,
+        failureIntent: Intent
+    ) {
         // Create a new transaction
         val transaction = Transaction(Timestamp(Date()), amount)
 
         // Add the transaction to the database
         val db = Firebase.firestore
-        db.collection("transactions")
-            .document(Firebase.auth.currentUser?.uid ?: "")
-            .update(transaction.date.toDate().toString(), transaction)
+        db.collection("societies")
+            .document(Firebase.auth.currentUser?.uid ?: "").collection("transactions")
+            .document(transactionId)
+            .update("completed", true)
             // Success
             .addOnSuccessListener {
                 Log.d(ContentValues.TAG, "DocumentSnapshot successfully written!")
                 startActivity(successIntent)
             }
             // Failure
-            .addOnFailureListener {
-                    e -> Log.w(ContentValues.TAG, "Error writing document", e)
+            .addOnFailureListener { e ->
+                Log.w(ContentValues.TAG, "Error writing document", e)
                 Toast.makeText(this@PayToAdmin, e.toString(), Toast.LENGTH_LONG).show()
                 Log.e(ContentValues.TAG, e.toString() + ":" + Firebase.auth.currentUser!!.uid)
 
                 val signUpIntent = Intent(this, SignupActivity::class.java)
                 startActivity(failureIntent)
+            }
+
+        db.collection("ADMIN").document("XqHXv5Ebd8aUXngVzSXq").get().addOnSuccessListener {
+
+            val balance = it.get("balance") as Long
+            db.collection("ADMIN").document("XqHXv5Ebd8aUXngVzSXq")
+                .update("balance", balance + amount)
+        }
+
+        db.collection("societies").document(Firebase.auth.currentUser?.uid ?: "").get()
+            .addOnSuccessListener {
+                val balance = it.get("currentAmount") as Long
+                db.collection("societies").document(Firebase.auth.currentUser?.uid ?: "")
+                    .update("currentAmount", balance - amount)
             }
     }
 }
