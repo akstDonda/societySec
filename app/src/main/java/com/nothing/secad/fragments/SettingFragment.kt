@@ -17,6 +17,7 @@ import com.nothing.secad.R
 import com.nothing.secad.databinding.FragmentSettingBinding
 import com.nothing.secad.setting.CustomerCare
 import com.nothing.secad.simple.LoginActivity
+import com.nothing.secad.simple.information_activity
 import com.nothing.secad.simple.welcome_signUp_login
 import com.zego.ve.Log
 
@@ -54,6 +55,11 @@ class SettingFragment : Fragment() {
 
         }
 
+        binding.llInfo.setOnClickListener(){
+
+            var intent = Intent(context, information_activity::class.java)
+            startActivity(intent)
+        }
         //customer care
         binding.customerCareLl.setOnClickListener(){
             var intent = Intent(context, CustomerCare::class.java)

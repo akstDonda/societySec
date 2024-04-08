@@ -13,6 +13,13 @@
         android:theme="@style/Base.Theme.SecAd"
         tools:targetApi="31">
         <activity
+            android:name=".simple.webView_info"
+            android:exported="false" />
+        <activity
+            android:name=".simple.information_activity"
+            android:exported="false" />
+
+        <activity
             android:name=".addWallet_animation"
             android:exported="false" />
         <activity
